@@ -3,7 +3,7 @@ extends layout
 block content
     h1 WRITE YOUR WORRIES HERE 
 
-    div.worry-form
-        input#worry-text(type='text', placeholder='Type Your Worries Away!')
+    div#worry-form(onsubmit="worryFormSubmit()")
+        input#worry-text(type='text', name='worry-text-input', placeholder='Type Your Worries Away!')
 
     button.btn.btn-primary(type='submit') SEND WORRIES AWAY
