@@ -4,7 +4,9 @@ function smileyBtnClicked(req, res, body) {
         method: "POST",
         data: { id: "hello"},
       }).done(function(response) {
-        console.log(response);
+        window.location.href = '/worry';
+        // dont kill me
+        //$('body').replaceWith(response);
       }).fail(function( error ) {
         console.log(error);
       });
