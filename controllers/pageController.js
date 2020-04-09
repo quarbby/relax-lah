@@ -6,8 +6,7 @@ exports.index = function(req, res) {
 
 exports.worry_page = function(req, res) {
     console.log('POST ' + req.body.id);
-    //res.render('worry');
-    res.redirect('/worry');
+    res.render('worry');
 }
 
 exports.show_worry_page = function(req, res) {
