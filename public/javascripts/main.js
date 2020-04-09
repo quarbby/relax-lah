@@ -75,6 +75,7 @@ function worrySubmitted() {
                 $('#additional-text').text(feedbackDone);
             }).fail(function(error){
                 console.log(error);
+                $('#additional-text').text(feedbackError);
             });
 
         }

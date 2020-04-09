@@ -58,9 +58,11 @@ function writeIntoDb(dataToWrite) {
     newEntry.save()
         .then(item => {
         console.log("item saved to database");
+        res.sendStatus(200);
     })
         .catch(err => {
         console.log(err);
+        res.sendStatus(500);
     });
 }
 
