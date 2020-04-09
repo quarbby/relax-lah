@@ -14,10 +14,11 @@ body {
 }
 
 .heropic {
-  background-image: url(/public/images/cityscape2.jpg);
+  /* background-image: url(images/cityscape2.jpg); */
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;
-  color: #FFFFF0
+  /* color: #FFFFF0 */
+  color: darkblue;
 }
 
