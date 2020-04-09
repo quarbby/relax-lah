@@ -1,3 +1,5 @@
+var Entry = require('../models/entry');
+
 const PAGECONTROLLER_TYPE_ENUM = {
     STARTSMILEY: 'startsmiley',
     WORRY: 'worry',
@@ -10,10 +12,8 @@ exports.index = function(req, res) {
     res.render('index', { title: 'Relax Lah' });
 };
 
-
 exports.show_page = function(req, res) {
     const pageType = req.body.pageType;
-    console.log("PAGE TYPE " + pageType)
 
     switch(pageType) {
         case PAGECONTROLLER_TYPE_ENUM.STARTSMILEY:
@@ -25,7 +25,7 @@ exports.show_page = function(req, res) {
             break;
 
         case PAGECONTROLLER_TYPE_ENUM.RELAX:
-            res.render('smiley');
+            res.render('smiles');
             break;
 
         case PAGECONTROLLER_TYPE_ENUM.ENDSMILEY:
@@ -33,11 +33,41 @@ exports.show_page = function(req, res) {
             break;
         
         case PAGECONTROLLER_TYPE_ENUM.FEEDBACK:
-            res.render('worry');
+            writeIntoDb(req.body);
+            //res.render('worry');
             break;
 
         default:
             res.render('index');
             break;
     }
+}
+
+function writeIntoDb(dataToWrite) {
+    var newEntry = new Entry({
+        entry_text: dataToWrite['entryText'],
+        feedback: dataToWrite['feedback'],
+        start_smiley: parseInt(dataToWrite['startSmiley']),
+        end_smiley: parseInt(dataToWrite['endSmiley']),
+        relaxation_activity: dataToWrite['relaxActivity'],
+        date_of_entry: new Date(),
+        date_of_start: dataToWrite['startDate'],
+        date_of_end: dataToWrite['endDate']
+    });
+
+    newEntry.save()
+        .then(item => {
+        console.log("item saved to database");
+    })
+        .catch(err => {
+        console.log(err);
+    });
+}
+
+function getCurrentTime() {
+    var today = new Date();
+    var date = today.getFullYear()+'-' + (today.getMonth()+1) + '-' + today.getDate();
+    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+
+    return date + 'T' + time;
 }

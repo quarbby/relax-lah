@@ -1,36 +1,88 @@
 var GLOBAL_PAGETYPE = PAGETYPE_ENUM.STARTSMILEY;
 var dataToSend = {};
 
-$(window).on('load', function(){
-    initState()
-});
+// $(window).on('load', function(){
+//     initState()
+// });
 
-function initState() {
+// function initState() {
     GLOBAL_PAGETYPE = PAGETYPE_ENUM.STARTSMILEY;
     dataToSend = {};
 
     setSmileyHeader();
-}
+// }
 
 function smileyBtnClicked(smileyNumber) {
 
-    dataToSend['startDate'] = getCurrentTime();
-    dataToSend['startSmiley'] = smileyNumber;
+    if (GLOBAL_PAGETYPE == PAGETYPE_ENUM.STARTSMILEY) {
+        dataToSend['startDate'] =  Date.now();
+        dataToSend['startSmiley'] = smileyNumber;
+    }
+    else if (GLOBAL_PAGETYPE == PAGETYPE_ENUM.ENDSMILEY) {
+        dataToSend['endSmiley'] = smileyNumber;
+    }
 
-    doPost();
+    $.ajax({
+            url: "/",
+            method: "POST",
+            data: {pageType: GLOBAL_PAGETYPE},
+            async: false
+        }).done(function(response){
+            $('#body-container').replaceWith(response);
+            changePageType();
+        }).fail(function(error){
+            console.log(error);
+    });
+
 }
 
 function worrySubmitted() {
-    var worryText = $('#worry-text').val();
-    if (worryText != '') {
-        dataToSend['entryText'] = worryText;
-        dataToSend['endDate'] = getCurrentTime();
+    var inputText = $('#worry-text').val();
 
-        doPost();
+    if (GLOBAL_PAGETYPE == PAGETYPE_ENUM.WORRY) {
+        if (inputText != '') {
+            dataToSend['entryText'] = inputText;
+            dataToSend['endDate'] = Date.now();
+
+            $.ajax({
+                url: "/",
+                method: "POST",
+                data: {pageType: GLOBAL_PAGETYPE},
+                async: false
+            }).done(function(response){
+                $('#body-container').replaceWith(response);
+                changePageType();
+            }).fail(function(error){
+                console.log(error);
+            });
+        }
+        else {
+            $('#additional-text').text(worryTextEmpty);
+        }
     }
-    else {
-        $('#additional-text').text(worryTextEmpty);
+
+    else if (GLOBAL_PAGETYPE == PAGETYPE_ENUM.FEEDBACK) {
+        if (inputText != '') {
+            dataToSend['feedbackText'] = inputText;
+            dataToSend['pageType'] = PAGETYPE_ENUM.FEEDBACK;
+
+            $.ajax({
+                url: "/",
+                method: "POST",
+                data: dataToSend,
+                async: false
+            }).done(function(response){
+                $('#additional-text').text(feedbackDone);
+            }).fail(function(error){
+                console.log(error);
+            });
+
+        }
+        else {
+            $('#additional-text').text(feedbackTextEmpty);
+        }
     }
+
 }
 
 function getCurrentTime() {
@@ -51,55 +103,42 @@ function setSmileyHeader() {
 }
 
 function relaxDone() {
-    console.log(GLOBAL_PAGETYPE);
-    doPost();
-    setSmileyHeader();
+    $.ajax({
+        url: "/",
+        method: "POST",
+        data: {pageType: GLOBAL_PAGETYPE},
+        async: false
+    }).done(function(response){
+        $('#body-container').replaceWith(response);
+        changePageType();
+    }).fail(function(error){
+        console.log(error);
+    });
 }
 
 // TO DO 
 function setRelaxationactivity() {
-    console.log('relax ' + GLOBAL_PAGETYPE)
     dataToSend['relaxActivity'] = '';
-}
-
-function doPost() {
-
-    var postResponse = $.ajax({
-            url: "/",
-            method: "POST",
-            data: {pageType: GLOBAL_PAGETYPE},
-            async: false
-        });
-
-    $('#body-container').html(postResponse.responseText);
-
-    changePageType();
 }
 
 function changePageType() {
 
-    switch(GLOBAL_PAGETYPE) {
-        case PAGETYPE_ENUM.STARTSMILEY:
-            GLOBAL_PAGETYPE = PAGETYPE_ENUM.WORRY;
-            $('#worryHeader').text(worryHeader);
-            break;
+    if (GLOBAL_PAGETYPE == PAGETYPE_ENUM.STARTSMILEY) {
+        GLOBAL_PAGETYPE = PAGETYPE_ENUM.WORRY;
+        $('#worryHeader').text(worryHeader);
+    }
+    else if (GLOBAL_PAGETYPE == PAGETYPE_ENUM.WORRY) {
+        GLOBAL_PAGETYPE = PAGETYPE_ENUM.RELAX;
 
-        case PAGETYPE_ENUM.WORRY:
-            console.log('changing worry ')
-            GLOBAL_PAGETYPE = PAGETYPE_ENUM.RELAX;
-            setRelaxationactivity();
-            break;
-
-        case PAGETYPE_ENUM.RELAX:
-            GLOBAL_PAGETYPE = PAGETYPE_ENUM.ENDSMILEY;
-            break;
-
-        case PAGETYPE_ENUM.ENDSMILEY:
-            GLOBAL_PAGETYPE = PAGETYPE_ENUM.FEEDBACK;
-            break;
-
-        default:
-            GLOBAL_PAGETYPE = PAGETYPE_ENUM.STARTSMILEY;
-            break;
+        setRelaxationactivity();
+    }
+    else if (GLOBAL_PAGETYPE == PAGETYPE_ENUM.RELAX) {
+        GLOBAL_PAGETYPE = PAGETYPE_ENUM.ENDSMILEY;
+        setSmileyHeader();
+    }
+    else if (GLOBAL_PAGETYPE == PAGETYPE_ENUM.ENDSMILEY) {
+        GLOBAL_PAGETYPE = PAGETYPE_ENUM.FEEDBACK;
+        $('#worryHeader').text(feedbackHeader);
+        $('#worry-btn').text(feedbackBtnText);
     }
 }

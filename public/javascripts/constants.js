@@ -10,6 +10,9 @@ const smileyHeaderStart = 'How Are You Feeling Today?';
 const smileyHeaderEnd = 'We Hope You\'re Feeling Better';
 
 const worryTextEmpty = 'Comeon, let your troubles out';
+const feedbackTextEmpty = 'Really? Nothing?';
+const feedbackDone = 'Thank you for your feedback!';
 
 const worryHeader = 'WRITE YOUR WORRIES HERE';
 const feedbackHeader = 'Tell us how we can improve';
+const feedbackBtnText = 'Here\'s my feedback!'
