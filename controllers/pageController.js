@@ -33,7 +33,7 @@ exports.show_page = function(req, res) {
             break;
         
         case PAGECONTROLLER_TYPE_ENUM.FEEDBACK:
-            writeIntoDb(req.body);
+            writeIntoDb(req.body, res);
             //res.render('worry');
             break;
 
@@ -43,7 +43,7 @@ exports.show_page = function(req, res) {
     }
 }
 
-function writeIntoDb(dataToWrite) {
+function writeIntoDb(dataToWrite, res) {
     var newEntry = new Entry({
         entry_text: dataToWrite['entryText'],
         feedback: dataToWrite['feedback'],
