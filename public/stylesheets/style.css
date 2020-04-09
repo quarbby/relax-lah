@@ -1,3 +1,12 @@
+@font-face {
+  font-family: "Mank Sans Medium";
+  src: url("../fonts/MankSans-Medium.ttf");
+}
+
+body {
+  font-family: 'Mank Sans Medium', Fallback, sans-serif;
+}
+
 .sidebar-nav {
   margin-top: 20px;
   padding: 0;
@@ -9,5 +18,6 @@
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;
+  color: #FFFFF0
 }
 
