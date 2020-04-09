@@ -1,10 +1,11 @@
 function smileyBtnClicked(req, res, body) {
     $.ajax({
-        url: "/",
+        url: "/worry",
         method: "POST",
         data: { id: "hello"},
       }).done(function(response) {
-        console.log(response);
+        // dont kill me
+        $('body').replaceWith(response);
       }).fail(function( error ) {
         console.log(error);
       });
