@@ -22,13 +22,21 @@ exports.show_page = function(req, res) {
             console.log('POST ' + req.body.id);
             res.render('worry');
             break;
-        
+
         case "worry":
             res.render('relax');
             break;
 
         case "relax":
             res.render('smiley');
+            break;
+
+        case "endsmiley":
+            res.render('worry');
+            break;
+        
+        case "feedback":
+            res.render('worry');
             break;
 
         default:
