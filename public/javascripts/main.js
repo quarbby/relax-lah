@@ -1,23 +1,36 @@
-function smileyBtnClicked(smileyNumber) {
+var GLOBAL_PAGETYPE = PAGETYPE_ENUM.STARTSMILEY;
+var dataToSend = {};
 
-    console.log(smileyNumber)
+$(window).on('load', function(){
+    initState()
+});
 
-    let dataToSend = {};
-    dataToSend['startTime'] = getCurrentTime();
+function initState() {
+    GLOBAL_PAGETYPE = PAGETYPE_ENUM.STARTSMILEY;
+    dataToSend = {};
 
-    $.ajax({
-        url: "/",
-        method: "POST",
-        data: { smiley_number: "1", is_start_smiley: true, is_end_smiley: true},
-      }).done(function(response) {
-        $('body').replaceWith(response);
-      }).fail(function( error ) {
-        console.log(error);
-      });
+    setSmileyHeader();
 }
 
-function worryFormSubmit() {
-    var worryText = $('#worry-form').elements['worry-text-input'];
+function smileyBtnClicked(smileyNumber) {
+
+    dataToSend['startDate'] = getCurrentTime();
+    dataToSend['startSmiley'] = smileyNumber;
+
+    doPost();
+}
+
+function worrySubmitted() {
+    var worryText = $('#worry-text').val();
+    if (worryText != '') {
+        dataToSend['entryText'] = worryText;
+        dataToSend['endDate'] = getCurrentTime();
+
+        doPost();
+    }
+    else {
+        $('#additional-text').text(worryTextEmpty);
+    }
 }
 
 function getCurrentTime() {
@@ -26,4 +39,67 @@ function getCurrentTime() {
     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 
     return date + 'T' + time;
+}
+
+function setSmileyHeader() {
+    if (GLOBAL_PAGETYPE == PAGETYPE_ENUM.STARTSMILEY) {
+        $('#smileyHeader').text(smileyHeaderStart);
+    }
+    else if (GLOBAL_PAGETYPE = PAGETYPE_ENUM.ENDSMILEY) {
+        $('#smileyHeader').text(smileyHeaderEnd);
+    }
+}
+
+function relaxDone() {
+    console.log(GLOBAL_PAGETYPE);
+    doPost();
+    setSmileyHeader();
+}
+
+// TO DO 
+function setRelaxationactivity() {
+    console.log('relax ' + GLOBAL_PAGETYPE)
+    dataToSend['relaxActivity'] = '';
+}
+
+function doPost() {
+
+    var postResponse = $.ajax({
+            url: "/",
+            method: "POST",
+            data: {pageType: GLOBAL_PAGETYPE},
+            async: false
+        });
+
+    $('#body-container').html(postResponse.responseText);
+
+    changePageType();
+}
+
+function changePageType() {
+
+    switch(GLOBAL_PAGETYPE) {
+        case PAGETYPE_ENUM.STARTSMILEY:
+            GLOBAL_PAGETYPE = PAGETYPE_ENUM.WORRY;
+            $('#worryHeader').text(worryHeader);
+            break;
+
+        case PAGETYPE_ENUM.WORRY:
+            console.log('changing worry ')
+            GLOBAL_PAGETYPE = PAGETYPE_ENUM.RELAX;
+            setRelaxationactivity();
+            break;
+
+        case PAGETYPE_ENUM.RELAX:
+            GLOBAL_PAGETYPE = PAGETYPE_ENUM.ENDSMILEY;
+            break;
+
+        case PAGETYPE_ENUM.ENDSMILEY:
+            GLOBAL_PAGETYPE = PAGETYPE_ENUM.FEEDBACK;
+            break;
+
+        default:
+            GLOBAL_PAGETYPE = PAGETYPE_ENUM.STARTSMILEY;
+            break;
+    }
 }

@@ -1,41 +1,38 @@
-
+const PAGECONTROLLER_TYPE_ENUM = {
+    STARTSMILEY: 'startsmiley',
+    WORRY: 'worry',
+    RELAX: 'relax',
+    ENDSMILEY: 'endsmiley',
+    FEEDBACK: 'feedback'
+}
 
 exports.index = function(req, res) {   
     res.render('index', { title: 'Relax Lah' });
 };
 
-exports.worry_page = function(req, res) {
-    console.log('POST ' + req.body.id);
-    res.render('worry');
-}
-
-exports.show_worry_page = function(req, res) {
-    console.log('Show Worry Page')
-    //res.render('worry', { title: 'Relax Lah' });
-}
 
 exports.show_page = function(req, res) {
-    const pageType = res.body.pageType;
+    const pageType = req.body.pageType;
+    console.log("PAGE TYPE " + pageType)
 
     switch(pageType) {
-        case "startsmiley":
-            console.log('POST ' + req.body.id);
+        case PAGECONTROLLER_TYPE_ENUM.STARTSMILEY:
             res.render('worry');
             break;
 
-        case "worry":
+        case PAGECONTROLLER_TYPE_ENUM.WORRY:
             res.render('relax');
             break;
 
-        case "relax":
+        case PAGECONTROLLER_TYPE_ENUM.RELAX:
             res.render('smiley');
             break;
 
-        case "endsmiley":
+        case PAGECONTROLLER_TYPE_ENUM.ENDSMILEY:
             res.render('worry');
             break;
         
-        case "feedback":
+        case PAGECONTROLLER_TYPE_ENUM.FEEDBACK:
             res.render('worry');
             break;
 

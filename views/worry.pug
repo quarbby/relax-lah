@@ -1,9 +1,9 @@
-extends layout
 
-block content
-    h1 WRITE YOUR WORRIES HERE 
+h1#worryHeader WRITE YOUR WORRIES HERE 
 
-    div#worry-form(onsubmit="worryFormSubmit()")
-        input#worry-text(type='text', name='worry-text-input', placeholder='Type Your Worries Away!')
+div#worry-form
+    input#worry-text(type='text', name='worry-text-input', placeholder='Type Your Worries Away!')
 
-    button.btn.btn-primary(type='submit') SEND WORRIES AWAY
+button.btn.btn-primary#worry-btn(onclick="worrySubmitted()") SEND WORRIES AWAY
+
+div#additional-text
