@@ -3,3 +3,11 @@
   padding: 0;
   list-style: none;
 }
+
+.heropic {
+  background-image: url(../images/CityScape2.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+
