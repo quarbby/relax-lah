@@ -14,7 +14,7 @@ body {
 }
 
 .heropic {
-  background-image: url(public/images/cityscape2.jpg);
+  background-image: url(/public/images/cityscape2.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;
