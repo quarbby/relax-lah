@@ -11,5 +11,6 @@ exports.worry_page = function(req, res) {
 }
 
 exports.show_worry_page = function(req, res) {
-    res.render('worry');
+    console.log('Show Worry Page')
+    //res.render('worry', { title: 'Relax Lah' });
 }
