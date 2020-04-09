@@ -13,3 +13,26 @@ exports.show_worry_page = function(req, res) {
     console.log('Show Worry Page')
     //res.render('worry', { title: 'Relax Lah' });
 }
+
+exports.show_page = function(req, res) {
+    const pageType = res.body.pageType;
+
+    switch(pageType) {
+        case "startsmiley":
+            console.log('POST ' + req.body.id);
+            res.render('worry');
+            break;
+        
+        case "worry":
+            res.render('relax');
+            break;
+
+        case "relax":
+            res.render('smiley');
+            break;
+
+        default:
+            res.render('index');
+            break;
+    }
+}
