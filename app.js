@@ -27,7 +27,7 @@ app.use(function(req, res, next) {
 });
 
 // Connect to mongoose
-var mongoDB = 'mongodb://127.0.0.1/entries';
+var mongoDB = process.env.MONGODB_URI || 'mongodb://127.0.0.1/entries';
 mongoose.connect(mongoDB, { useNewUrlParser: true });
 
 var db = mongoose.connection;
