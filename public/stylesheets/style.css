@@ -14,10 +14,11 @@ body {
 }
 
 .heropic {
-  background-image: url(../images/CityScape2.jpg);
+  background-image: url(../images/Aurora.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;
-  color: #FFFFF0
+  color: #FFFFF0;
+  -webkit-filter: saturate(200%);
 }
 
