@@ -1,12 +1,10 @@
 block content
 
-    div#body-container
-        p#smileyHeader
-
-        table
-            tr
-                th(class='btn btn-primary' onclick="smileyBtnClicked('1')") depresser
-                th(class='btn btn-primary' onclick="smileyBtnClicked('2')") depressed
-                th(class='btn btn-primary' onclick="smileyBtnClicked('3')") neutral
-                th(class='btn btn-primary' onclick="smileyBtnClicked('4')") okay
-                th(class='btn btn-primary' onclick="smileyBtnClicked('5')") not so sad
+    div(class='title')
+        p How are you feeling today?
+    div(class='smiley-holder')
+        div(class='smiley smiley-most' onclick="smileyBtnClicked('1')")
+        div(class='smiley smiley-more' onclick="smileyBtnClicked('2')")
+        div(class='smiley smiley-meh' onclick="smileyBtnClicked('3')")
+        div(class='smiley smiley-less' onclick="smileyBtnClicked('4')")
+        div(class='smiley smiley-least' onclick="smileyBtnClicked('5')")

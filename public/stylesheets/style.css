@@ -12,6 +12,16 @@ body {
   padding: 0;
   list-style: none;
 }
+/* Main */
+
+.main-container {
+  display: grid;
+}
+
+#body-container {
+  display: grid;
+  grid-gap: 2vh;
+}
 
 .heropic {
   background-image: url(../images/Aurora.jpg);
@@ -20,5 +30,69 @@ body {
   height: 100vh;
   color: #FFFFF0;
   -webkit-filter: saturate(200%);
+}
+
+.title {
+  text-align: center;
+  font-size: 10vh;
+}
+
+/* Smileys */
+
+.smiley {
+  display: grid;
+  justify-self: center;
+  background-size: cover;
+  height: 13vh;
+  width: 13vh;
+  cursor: pointer;
+  border-radius: 13vh;
+  box-shadow: 0.2vh 0.2vh 0.3vh #222222;
+}
+
+.smiley-holder {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  align-items: center;
+}
+
+.smiley-most {
+  background-image: url(../images/smileymost.png);
+}
+
+.smiley-most:hover {
+  background-image: url(../images/smileymost-hover.png);
+  transition: 0.3s;
+}
+
+.smiley-more {
+  background-image: url(../images/smileymore.png);
+}
+
+.smiley-more:hover {
+  background-image: url(../images/smileymore-hover.png);
+  transition: 0.3s;
+}
+
+.smiley-meh {
+  background-image: url(../images/smileymeh.png);
+}
+
+.smiley-less {
+  background-image: url(../images/smileyless.png);
+}
+
+.smiley-less:hover {
+  background-image: url(../images/smileyless-hover.png);
+  transition: 0.3s;
+}
+
+.smiley-least {
+  background-image: url(../images/smileyleast.png);
+}
+
+.smiley-least:hover {
+  background-image: url(../images/smileyleast-hover.png);
+  transition: 0.3s;
 }
 
