@@ -33,6 +33,8 @@ mongoose.connect(mongoDB, { useNewUrlParser: true });
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
+console.log('Mongo completed');
+
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
