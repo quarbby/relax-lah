@@ -31,8 +31,8 @@ function smileyBtnClicked(smileyNumber) {
             // $('#body-container').replaceWith(response);
             $('#body-container').fadeOut("slow", function(){
                 var div = $(response).hide();
-                $('#body-container').replaceWith(response);
-                //$('#body-container').fadeIn("slow");
+                $(this).replaceWith(div);
+                $('#body-container').fadeIn("slow");
             });
             changePageType();
         }).fail(function(error){
