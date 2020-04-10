@@ -28,6 +28,7 @@ function smileyBtnClicked(smileyNumber) {
             data: {pageType: GLOBAL_PAGETYPE},
             async: false
         }).done(function(response){
+            console.log(response)
             // $('#body-container').replaceWith(response);
             $('#body-container').fadeOut("slow", function(){
                 var div = $(response).hide();
@@ -60,6 +61,7 @@ function worrySubmitted() {
                     var div = $(response).hide();
                     $(this).replaceWith(div);
                     $('#body-container').fadeIn("slow");
+                    changePageType();
                 });
                 changePageType();
             }).fail(function(error){

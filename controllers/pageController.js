@@ -29,6 +29,7 @@ exports.show_page = function(req, res) {
             break;
 
         case PAGECONTROLLER_TYPE_ENUM.ENDSMILEY:
+            console.log("End smiley")
             res.render('worry');
             break;
         
