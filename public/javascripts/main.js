@@ -28,7 +28,6 @@ function smileyBtnClicked(smileyNumber) {
             data: {pageType: GLOBAL_PAGETYPE},
             async: false
         }).done(function(response){
-            console.log(response)
             // $('#body-container').replaceWith(response);
             $('#body-container').fadeOut("slow", function(){
                 var div = $(response).hide();
@@ -139,7 +138,6 @@ function setRelaxationactivity() {
 }
 
 function changePageType() {
-
     if (GLOBAL_PAGETYPE == PAGETYPE_ENUM.STARTSMILEY) {
         GLOBAL_PAGETYPE = PAGETYPE_ENUM.WORRY;
         $('#worryHeader').text(worryHeader);
