@@ -63,7 +63,6 @@ function worrySubmitted() {
                     $('#body-container').fadeIn("slow");
                     changePageType();
                 });
-                changePageType();
             }).fail(function(error){
                 console.log(error);
             });
@@ -77,6 +76,8 @@ function worrySubmitted() {
         if (inputText != '') {
             dataToSend['feedbackText'] = inputText;
             dataToSend['pageType'] = PAGETYPE_ENUM.FEEDBACK;
+
+            console.log(dataToSend)
 
             $.ajax({
                 url: "/",
@@ -116,12 +117,15 @@ function setSmileyHeader() {
 }
 
 function relaxDone() {
+    console.log('relax done')
+
     $.ajax({
         url: "/",
         method: "POST",
         data: {pageType: GLOBAL_PAGETYPE},
         async: false
     }).done(function(response){
+        console.log('relax response ' + response)
         $('#body-container').replaceWith(response);
         changePageType();
     }).fail(function(error){
