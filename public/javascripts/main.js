@@ -179,7 +179,7 @@ function performRelaxationactivity() {
                 });
                 
             });
-        }, i * 1000);
+        }, i * 11000);
     });
 }
 
