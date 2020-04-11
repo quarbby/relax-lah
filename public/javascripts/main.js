@@ -136,8 +136,12 @@ function relaxDone() {
         data: {pageType: GLOBAL_PAGETYPE},
         async: false
     }).done(function(response){
-        $('#body-container').replaceWith(response);
-        changePageType();
+        $('#body-container').fadeOut("slow", function(){
+            var div = $(response).hide();
+            $(this).replaceWith(div);
+            $('#body-container').fadeIn("slow");
+            changePageType();
+        });
     }).fail(function(error){
         console.log(error);
     });
