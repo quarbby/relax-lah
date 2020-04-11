@@ -33,6 +33,8 @@ function smileyBtnClicked(smileyNumber) {
                 var div = $(response).hide();
                 $(this).replaceWith(div);
                 $('#body-container').fadeIn("slow");
+                $('#worryHeader').text(feedbackHeader);
+                $('#worry-btn').text(feedbackBtnText);
             });
             changePageType();
         }).fail(function(error){
@@ -116,7 +118,6 @@ function setSmileyHeader() {
 }
 
 function relaxDone() {
-    console.log('relax done')
 
     $.ajax({
         url: "/",
@@ -124,7 +125,6 @@ function relaxDone() {
         data: {pageType: GLOBAL_PAGETYPE},
         async: false
     }).done(function(response){
-        console.log('relax response ' + response)
         $('#body-container').replaceWith(response);
         changePageType();
     }).fail(function(error){
@@ -153,7 +153,5 @@ function changePageType() {
     }
     else if (GLOBAL_PAGETYPE == PAGETYPE_ENUM.ENDSMILEY) {
         GLOBAL_PAGETYPE = PAGETYPE_ENUM.FEEDBACK;
-        $('#worryHeader').text(feedbackHeader);
-        $('#worry-btn').text(feedbackBtnText);
     }
 }
