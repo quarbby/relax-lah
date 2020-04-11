@@ -5,8 +5,8 @@ const PAGECONTROLLER_TYPE_ENUM = {
     WORRY: 'worry',
     RELAX: 'relax',
     MEDITATION: 'meditation',
-    ENDSMILEY: 'endsmiley',
-    FEEDBACK: 'feedback'
+    FEEDBACK: 'feedback',
+    BYE: 'bye'
 }
 
 exports.index = function(req, res) {   
@@ -39,7 +39,7 @@ exports.show_page = function(req, res) {
         
         case PAGECONTROLLER_TYPE_ENUM.FEEDBACK:
             writeIntoDb(req.body, res);
-            //res.render('worry');
+            res.render('bye');
             break;
 
         default:

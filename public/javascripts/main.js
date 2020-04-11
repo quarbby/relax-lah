@@ -14,8 +14,6 @@ var startLoop = 1;
 // }
 
 function smileyBtnClicked(smileyNumber) {
-    console.log(GLOBAL_PAGETYPE);
-
     if (GLOBAL_PAGETYPE == PAGETYPE_ENUM.STARTSMILEY) {
         dataToSend['startDate'] =  Date.now();
         dataToSend['startSmiley'] = smileyNumber;
@@ -26,7 +24,6 @@ function smileyBtnClicked(smileyNumber) {
             data: {pageType: GLOBAL_PAGETYPE},
             async: false
         }).done(function(response){
-            console.log(response);
             // $('#body-container').replaceWith(response);
             $('#body-container').fadeOut("slow", function(){
                 var div = $(response).hide();
@@ -39,7 +36,6 @@ function smileyBtnClicked(smileyNumber) {
     });
     }
     else if (GLOBAL_PAGETYPE == PAGETYPE_ENUM.FEEDBACK) { 
-        console.log('getting in?');
         dataToSend['endSmiley'] = smileyNumber;
         let smileyHTML = "<div id='smiley-holder'>";
         for (let i = 0; i < 5; i++) {
@@ -51,7 +47,6 @@ function smileyBtnClicked(smileyNumber) {
             smileyHTML += buildString;
         }
         smileyHTML += "</div>";
-        console.log(smileyHTML);
         $('#smiley-holder').fadeOut("fast", function(){
             var div = $(smileyHTML).hide();
             $(this).replaceWith(div);
@@ -101,8 +96,6 @@ function worrySubmitted() {
             dataToSend['feedbackText'] = inputText;
             dataToSend['pageType'] = PAGETYPE_ENUM.FEEDBACK;
 
-            console.log(dataToSend)
-
             $.ajax({
                 url: "/",
                 method: "POST",
@@ -112,7 +105,12 @@ function worrySubmitted() {
                 $('#additional-text').text(feedbackDone);
             }).fail(function(error){
                 console.log(error);
-                $('#additional-text').text(feedbackError);
+               // $('#additional-text').text(feedbackError);
+               $('#body-container').fadeOut("slow", function(){
+                var div = $(response).hide();
+                $(this).replaceWith(div);
+                $('#body-container').fadeIn("slow");
+            });
             });
         }
         else {
@@ -157,7 +155,7 @@ function performRelaxationactivity() {
     let delay = 0;
     meditationTextWithTiming.forEach((step, i) => {
         setTimeout(() => {
-            console.log(delay);
+           // console.log(delay);
             let timing = step.timing;
             let text = step.text;
             // delay += timing;
