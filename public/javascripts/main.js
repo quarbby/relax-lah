@@ -13,6 +13,7 @@ var dataToSend = {};
 // }
 
 function smileyBtnClicked(smileyNumber) {
+    console.log(GLOBAL_PAGETYPE);
 
     if (GLOBAL_PAGETYPE == PAGETYPE_ENUM.STARTSMILEY) {
         dataToSend['startDate'] =  Date.now();
@@ -24,6 +25,7 @@ function smileyBtnClicked(smileyNumber) {
             data: {pageType: GLOBAL_PAGETYPE},
             async: false
         }).done(function(response){
+            console.log(response);
             // $('#body-container').replaceWith(response);
             $('#body-container').fadeOut("slow", function(){
                 var div = $(response).hide();
@@ -35,8 +37,31 @@ function smileyBtnClicked(smileyNumber) {
             console.log(error);
     });
     }
-    else if (GLOBAL_PAGETYPE == PAGETYPE_ENUM.ENDSMILEY) {
+    else if (GLOBAL_PAGETYPE == PAGETYPE_ENUM.FEEDBACK) { 
+        console.log('getting in?');
         dataToSend['endSmiley'] = smileyNumber;
+        let smileyHTML = "<div id='smiley-holder'>";
+        for (let i = 0; i < 5; i++) {
+            let currentNumber = i + 1;
+            let buildString = "<div class='smiley faded smiley-" + currentNumber + "'></div>";
+            if (smileyNumber == currentNumber) {
+                buildString = "<div class='smiley smiley-" + currentNumber + "'></div>";
+            }
+            smileyHTML += buildString;
+        }
+        smileyHTML += "</div>";
+        console.log(smileyHTML);
+        $('#smiley-holder').fadeOut("fast", function(){
+            var div = $(smileyHTML).hide();
+            $(this).replaceWith(div);
+            $('#smiley-holder').fadeIn("fast", function(){
+                for (let i = 0; i < 5; i++) {
+                    let currentNumber = i + 1;
+                    let smallString = ".smiley-" + currentNumber;
+                    $('#smiley-holder').on("click", smallString, () => smileyBtnClicked(currentNumber));
+                }
+            });
+        });
     }
 }
 

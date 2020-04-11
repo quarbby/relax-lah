@@ -50,50 +50,54 @@ body {
   box-shadow: 0.2vh 0.2vh 0.3vh #222222;
 }
 
-.smiley-holder {
+#smiley-holder {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   align-items: center;
 }
 
-.smiley-most {
+.smiley-1 {
   background-image: url(../images/smileymost.png);
 }
 
-.smiley-most:hover {
+.smiley-1:hover {
   background-image: url(../images/smileymost-hover.png);
   transition: 0.3s;
 }
 
-.smiley-more {
+.smiley-2 {
   background-image: url(../images/smileymore.png);
 }
 
-.smiley-more:hover {
+.smiley-2:hover {
   background-image: url(../images/smileymore-hover.png);
   transition: 0.3s;
 }
 
-.smiley-meh {
+.smiley-3 {
   background-image: url(../images/smileymeh.png);
 }
 
-.smiley-less {
+.smiley-4 {
   background-image: url(../images/smileyless.png);
 }
 
-.smiley-less:hover {
+.smiley-4:hover {
   background-image: url(../images/smileyless-hover.png);
   transition: 0.3s;
 }
 
-.smiley-least {
+.smiley-5 {
   background-image: url(../images/smileyleast.png);
 }
 
-.smiley-least:hover {
+.smiley-5:hover {
   background-image: url(../images/smileyleast-hover.png);
   transition: 0.3s;
+}
+
+.faded {
+  opacity: 0.2;
 }
 
 /* Worry Page */
