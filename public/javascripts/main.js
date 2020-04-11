@@ -102,14 +102,13 @@ function worrySubmitted() {
                 data: dataToSend,
                 async: false
             }).done(function(response){
-                $('#additional-text').text(feedbackDone);
-            }).fail(function(error){
-                console.log(error);
                // $('#additional-text').text(feedbackError);
                $('#body-container').fadeOut("slow", function(){
                 var div = $(response).hide();
                 $(this).replaceWith(div);
                 $('#body-container').fadeIn("slow");
+            }).fail(function(error){
+                console.log(error);
             });
             });
         }
