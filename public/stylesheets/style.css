@@ -23,6 +23,10 @@ body {
   grid-gap: 2vh;
 }
 
+#body-container input {
+  overflow-wrap: break-word;
+}
+
 .heropic {
   background-image: url(../images/Aurora.jpg);
   background-repeat: no-repeat;
@@ -34,7 +38,7 @@ body {
 
 .title {
   text-align: center;
-  font-size: 10vh;
+  font-size: 8vh;
 }
 
 /* Smileys */
@@ -102,9 +106,9 @@ body {
 
 /* Worry Page */
 
-#worry-form input {
+#worry-form textarea {
   width: 100%;
-  height: 8vh;
+  height: 40vh;
   font-size: 3vh;
   color: #FFFFF0;
   background: #222222;

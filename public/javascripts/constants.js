@@ -6,16 +6,16 @@ const PAGETYPE_ENUM = {
     FEEDBACK: 'feedback'
 }
 
-const smileyHeaderStart = 'How Are You Feeling Today?';
-const smileyHeaderEnd = 'We Hope You\'re Feeling Better';
+const smileyHeaderStart = 'How are you feeling today?';
+const smileyHeaderEnd = 'We hope you\'re feeling better';
 
-const worryTextEmpty = 'Comeon, let your troubles out';
+const worryTextEmpty = 'Come on, let your troubles out';
 const feedbackTextEmpty = 'Really? Nothing?';
 const feedbackDone = 'Thank you for your feedback!';
 const feedbackError = 'Uhoh Error. Please try again when the server is more sane';
 
 const worryHeader = 'It\'s okay to not feel okay. Rant below and watch it vanish, like magic';
-const feedbackHeader = 'Leave us a feedback. Let us know how we can make your day better.';
+const feedbackHeader = 'Leave us feedback, let us know how to make your day better';
 const feedbackBtnText = 'Here\'s my feedback!'
 
 const meditationTextWithTiming = [

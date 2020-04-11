@@ -63,6 +63,7 @@ function smileyBtnClicked(smileyNumber) {
 
 function worrySubmitted() {
     var inputText = $('#worry-text').val();
+    console.log(inputText);
 
     if (GLOBAL_PAGETYPE == PAGETYPE_ENUM.WORRY) {
         if (inputText != '') {
