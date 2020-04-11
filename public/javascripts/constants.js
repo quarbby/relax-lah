@@ -2,7 +2,6 @@ const PAGETYPE_ENUM = {
     STARTSMILEY: 'startsmiley',
     WORRY: 'worry',
     RELAX: 'relax',
-    ENDSMILEY: 'endsmiley',
     FEEDBACK: 'feedback'
 }
 
@@ -14,6 +13,6 @@ const feedbackTextEmpty = 'Really? Nothing?';
 const feedbackDone = 'Thank you for your feedback!';
 const feedbackError = 'Uhoh Error. Please try again when the server is more sane';
 
-const worryHeader = 'WRITE YOUR WORRIES HERE';
-const feedbackHeader = 'Tell us how we can improve';
+const worryHeader = 'It\'s okay to not feel okay. Rant below and watch it vanish, like magic';
+const feedbackHeader = 'Leave us a feedback. Let us know how we can make your day better.';
 const feedbackBtnText = 'Here\'s my feedback!'

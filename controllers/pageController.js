@@ -25,12 +25,7 @@ exports.show_page = function(req, res) {
             break;
 
         case PAGECONTROLLER_TYPE_ENUM.RELAX:
-            console.log('relax time')
-            res.render('smiles');
-            break;
-
-        case PAGECONTROLLER_TYPE_ENUM.ENDSMILEY:
-            res.render('worry');
+            res.render('final');
             break;
         
         case PAGECONTROLLER_TYPE_ENUM.FEEDBACK:

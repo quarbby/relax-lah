@@ -9,7 +9,7 @@ var dataToSend = {};
     GLOBAL_PAGETYPE = PAGETYPE_ENUM.STARTSMILEY;
     dataToSend = {};
 
-    setSmileyHeader();
+    $('#smileyHeader').text(smileyHeaderStart);
 // }
 
 function smileyBtnClicked(smileyNumber) {
@@ -17,12 +17,8 @@ function smileyBtnClicked(smileyNumber) {
     if (GLOBAL_PAGETYPE == PAGETYPE_ENUM.STARTSMILEY) {
         dataToSend['startDate'] =  Date.now();
         dataToSend['startSmiley'] = smileyNumber;
-    }
-    else if (GLOBAL_PAGETYPE == PAGETYPE_ENUM.ENDSMILEY) {
-        dataToSend['endSmiley'] = smileyNumber;
-    }
 
-    $.ajax({
+        $.ajax({
             url: "/",
             method: "POST",
             data: {pageType: GLOBAL_PAGETYPE},
@@ -33,14 +29,15 @@ function smileyBtnClicked(smileyNumber) {
                 var div = $(response).hide();
                 $(this).replaceWith(div);
                 $('#body-container').fadeIn("slow");
-                $('#worryHeader').text(feedbackHeader);
-                $('#worry-btn').text(feedbackBtnText);
             });
             changePageType();
         }).fail(function(error){
             console.log(error);
     });
-
+    }
+    else if (GLOBAL_PAGETYPE == PAGETYPE_ENUM.ENDSMILEY) {
+        dataToSend['endSmiley'] = smileyNumber;
+    }
 }
 
 function worrySubmitted() {
@@ -91,13 +88,11 @@ function worrySubmitted() {
                 console.log(error);
                 $('#additional-text').text(feedbackError);
             });
-
         }
         else {
             $('#additional-text').text(feedbackTextEmpty);
         }
     }
-
 }
 
 function getCurrentTime() {
@@ -106,15 +101,6 @@ function getCurrentTime() {
     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 
     return date + 'T' + time;
-}
-
-function setSmileyHeader() {
-    if (GLOBAL_PAGETYPE == PAGETYPE_ENUM.STARTSMILEY) {
-        $('#smileyHeader').text(smileyHeaderStart);
-    }
-    else if (GLOBAL_PAGETYPE = PAGETYPE_ENUM.ENDSMILEY) {
-        $('#smileyHeader').text(smileyHeaderEnd);
-    }
 }
 
 function relaxDone() {
@@ -144,14 +130,12 @@ function changePageType() {
     }
     else if (GLOBAL_PAGETYPE == PAGETYPE_ENUM.WORRY) {
         GLOBAL_PAGETYPE = PAGETYPE_ENUM.RELAX;
-
         setRelaxationactivity();
     }
     else if (GLOBAL_PAGETYPE == PAGETYPE_ENUM.RELAX) {
-        GLOBAL_PAGETYPE = PAGETYPE_ENUM.ENDSMILEY;
-        setSmileyHeader();
-    }
-    else if (GLOBAL_PAGETYPE == PAGETYPE_ENUM.ENDSMILEY) {
         GLOBAL_PAGETYPE = PAGETYPE_ENUM.FEEDBACK;
+        $('#smileyHeader').text(smileyHeaderEnd);
+        $('#worryHeader').text(feedbackHeader);
+        $('#worry-btn').text(feedbackBtnText);
     }
 }
