@@ -1,5 +1,6 @@
 var GLOBAL_PAGETYPE = PAGETYPE_ENUM.STARTSMILEY;
 var dataToSend = {};
+var startLoop = 1;
 
 // $(window).on('load', function(){
 //     initState()
@@ -152,19 +153,59 @@ function setRelaxationactivity() {
     dataToSend['relaxActivity'] = '';
 }
 
+function performRelaxationactivity() {
+    let delay = 0;
+    meditationTextWithTiming.forEach((step, i) => {
+        setTimeout(() => {
+            console.log(delay);
+            let timing = step.timing;
+            let text = step.text;
+            // delay += timing;
+            // delay += i;
+            delay = i;
+            let mediHTML = "<div id='meditation-text'>" + text + "</div>";
+            // if (i == meditationTextWithTiming.length - 1) {
+            //     mediHTML += "<div id='meditation-button'>Continue</div>";
+            // }
+            $('#meditation-text').fadeOut("slow", function(){
+                var div = $(mediHTML).hide();
+                $(this).replaceWith(div);
+                $('#meditation-text').fadeIn("slow", function() {
+                    if (i == meditationTextWithTiming.length - 1) {
+                        $('#body-container').append("<button id='meditation-button' class='btn btn-primary'>Continue</button>").fadeIn("slow", function(){
+                            $('#body-container').on("click", '#meditation-button', () => relaxDone());
+                        })
+                    }
+                });
+                
+            });
+        }, i * 1000);
+    });
+}
+
 function changePageType() {
     if (GLOBAL_PAGETYPE == PAGETYPE_ENUM.STARTSMILEY) {
         GLOBAL_PAGETYPE = PAGETYPE_ENUM.WORRY;
         $('#worryHeader').text(worryHeader);
     }
+    // else if (GLOBAL_PAGETYPE == PAGETYPE_ENUM.WORRY) {
+    //     GLOBAL_PAGETYPE = PAGETYPE_ENUM.RELAX;
+    //     setRelaxationactivity();
+    // }
     else if (GLOBAL_PAGETYPE == PAGETYPE_ENUM.WORRY) {
-        GLOBAL_PAGETYPE = PAGETYPE_ENUM.RELAX;
-        setRelaxationactivity();
+        GLOBAL_PAGETYPE = PAGETYPE_ENUM.MEDITATION;
     }
-    else if (GLOBAL_PAGETYPE == PAGETYPE_ENUM.RELAX) {
+    else if (GLOBAL_PAGETYPE == PAGETYPE_ENUM.MEDITATION) {
         GLOBAL_PAGETYPE = PAGETYPE_ENUM.FEEDBACK;
+        // setRelaxationactivity();
         $('#smileyHeader').text(smileyHeaderEnd);
         $('#worryHeader').text(feedbackHeader);
         $('#worry-btn').text(feedbackBtnText);
     }
+    // else if (GLOBAL_PAGETYPE == PAGETYPE_ENUM.RELAX) {
+    //     GLOBAL_PAGETYPE = PAGETYPE_ENUM.FEEDBACK;
+    //     $('#smileyHeader').text(smileyHeaderEnd);
+    //     $('#worryHeader').text(feedbackHeader);
+    //     $('#worry-btn').text(feedbackBtnText);
+    // }
 }

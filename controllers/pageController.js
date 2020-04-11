@@ -4,6 +4,7 @@ const PAGECONTROLLER_TYPE_ENUM = {
     STARTSMILEY: 'startsmiley',
     WORRY: 'worry',
     RELAX: 'relax',
+    MEDITATION: 'meditation',
     ENDSMILEY: 'endsmiley',
     FEEDBACK: 'feedback'
 }
@@ -20,13 +21,21 @@ exports.show_page = function(req, res) {
             res.render('worry');
             break;
 
+        // case PAGECONTROLLER_TYPE_ENUM.WORRY:
+        //     res.render('relax');
+        //     break;
+
         case PAGECONTROLLER_TYPE_ENUM.WORRY:
-            res.render('relax');
+            res.render('meditation');
             break;
 
-        case PAGECONTROLLER_TYPE_ENUM.RELAX:
+        case PAGECONTROLLER_TYPE_ENUM.MEDITATION:
             res.render('final');
             break;
+
+        // case PAGECONTROLLER_TYPE_ENUM.RELAX:
+        //     res.render('final');
+        //     break;
         
         case PAGECONTROLLER_TYPE_ENUM.FEEDBACK:
             writeIntoDb(req.body, res);

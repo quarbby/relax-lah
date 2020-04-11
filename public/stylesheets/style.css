@@ -115,6 +115,21 @@ body {
   position: absolute;
 }
 
+/* Meditation Page */
+
+#meditation-text {
+  text-align: center;
+  font-size: 8vh;
+}
+
+/* #meditation-button {
+  background: #333333;
+  font-size: 5vh;
+  border-radius: 0.5vh;
+  box-shadow: 0.1vh 0.1vh 0.1vh #222222;
+  cursor: pointer;
+} */
+
 
 /* Transitions */
 
