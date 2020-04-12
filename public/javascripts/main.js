@@ -213,12 +213,12 @@ function setMeditationText(text, stepTiming, isDone) {
         var div = $(mediHTML).hide();
         $(this).replaceWith(div);
 
-        // var stepTimingCounter = stepTiming;
+        var stepTimingCounter = stepTiming;
 
-        // setTimeout(() => {
-        //     $('#relax-timing').text(stepTimingCounter);
-        //     stepTimingCounter--;
-        // }, stepTiming*1000 );
+        setTimeout(() => {
+            $('#relax-timing').text(stepTimingCounter);
+            stepTimingCounter--;
+        }, stepTiming*1000 );
 
         $('#meditation-div').fadeIn("slow", function() {
             if (isDone) {
