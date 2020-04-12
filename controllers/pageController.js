@@ -21,10 +21,6 @@ exports.show_page = function(req, res) {
             res.render('worry');
             break;
 
-        // case PAGECONTROLLER_TYPE_ENUM.WORRY:
-        //     res.render('relax');
-        //     break;
-
         case PAGECONTROLLER_TYPE_ENUM.WORRY:
             res.render('meditation');
             break;
@@ -32,10 +28,6 @@ exports.show_page = function(req, res) {
         case PAGECONTROLLER_TYPE_ENUM.MEDITATION:
             res.render('final');
             break;
-
-        // case PAGECONTROLLER_TYPE_ENUM.RELAX:
-        //     res.render('final');
-        //     break;
         
         case PAGECONTROLLER_TYPE_ENUM.FEEDBACK:
             writeIntoDb(req.body, res);
@@ -69,12 +61,4 @@ function writeIntoDb(dataToWrite, res) {
         console.log(err);
         res.sendStatus(500);
     });
-}
-
-function getCurrentTime() {
-    var today = new Date();
-    var date = today.getFullYear()+'-' + (today.getMonth()+1) + '-' + today.getDate();
-    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-
-    return date + 'T' + time;
 }

@@ -63,7 +63,6 @@ function smileyBtnClicked(smileyNumber) {
 
 function worrySubmitted() {
     var inputText = $('#worry-text').val();
-    console.log(inputText);
 
     if (GLOBAL_PAGETYPE == PAGETYPE_ENUM.WORRY) {
         if (inputText != '') {
@@ -146,11 +145,6 @@ function relaxDone() {
     });
 }
 
-// TO DO 
-function setRelaxationactivity() {
-    dataToSend['relaxActivity'] = '';
-}
-
 function performRelaxationactivity() {
     let delay = 0;
     meditationTextWithTiming.forEach((step, i) => {
@@ -158,6 +152,8 @@ function performRelaxationactivity() {
            // console.log(delay);
             let timing = step.timing;
             let text = step.text;
+            let stepTiming = step.stepTiming;
+
             // delay += timing;
             // delay += i;
             delay = i;
@@ -165,9 +161,22 @@ function performRelaxationactivity() {
             // if (i == meditationTextWithTiming.length - 1) {
             //     mediHTML += "<div id='meditation-button'>Continue</div>";
             // }
+
             $('#meditation-text').fadeOut("slow", function(){
                 var div = $(mediHTML).hide();
                 $(this).replaceWith(div);
+
+                let stepHTML = "<div id='relax-timing'></div>";
+                $('#body-container').append(stepHTML);
+
+                if (stepTiming != -1) {
+                    setInterval(function(){
+                        $('#relax-timing').text(stepTiming);
+    
+                        stepTiming = stepTiming - 1;
+                    }, stepTiming*1000);
+                }
+
                 $('#meditation-text').fadeIn("slow", function() {
                     if (i == meditationTextWithTiming.length - 1) {
                         $('#body-container').append("<button id='meditation-button' class='btn btn-primary'>Continue</button>").fadeIn("slow", function(){
@@ -186,24 +195,14 @@ function changePageType() {
         GLOBAL_PAGETYPE = PAGETYPE_ENUM.WORRY;
         $('#worryHeader').text(worryHeader);
     }
-    // else if (GLOBAL_PAGETYPE == PAGETYPE_ENUM.WORRY) {
-    //     GLOBAL_PAGETYPE = PAGETYPE_ENUM.RELAX;
-    //     setRelaxationactivity();
-    // }
+
     else if (GLOBAL_PAGETYPE == PAGETYPE_ENUM.WORRY) {
         GLOBAL_PAGETYPE = PAGETYPE_ENUM.MEDITATION;
     }
     else if (GLOBAL_PAGETYPE == PAGETYPE_ENUM.MEDITATION) {
         GLOBAL_PAGETYPE = PAGETYPE_ENUM.FEEDBACK;
-        // setRelaxationactivity();
         $('#smileyHeader').text(smileyHeaderEnd);
         $('#worryHeader').text(feedbackHeader);
         $('#worry-btn').text(feedbackBtnText);
     }
-    // else if (GLOBAL_PAGETYPE == PAGETYPE_ENUM.RELAX) {
-    //     GLOBAL_PAGETYPE = PAGETYPE_ENUM.FEEDBACK;
-    //     $('#smileyHeader').text(smileyHeaderEnd);
-    //     $('#worryHeader').text(feedbackHeader);
-    //     $('#worry-btn').text(feedbackBtnText);
-    // }
 }

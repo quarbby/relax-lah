@@ -126,6 +126,11 @@ body {
   font-size: 8vh;
 }
 
+#relax-timing {
+  text-align: center;
+  font-size: 8vh;
+}
+
 /* #meditation-button {
   background: #333333;
   font-size: 5vh;
