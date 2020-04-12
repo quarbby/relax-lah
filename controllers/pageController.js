@@ -36,7 +36,8 @@ exports.show_page = function(req, res) {
             break;
         
         case PAGECONTROLLER_TYPE_ENUM.FEEDBACK_SMILEY:
-            writeFeedbackSmileyIntoDb(req.body, entryObjId);
+            var statusCode = writeFeedbackSmileyIntoDb(req.body, entryObjId);
+            res.send(statusCode.toString());
             break;
 
         case PAGECONTROLLER_TYPE_ENUM.FEEDBACK:
@@ -57,8 +58,6 @@ exports.show_page = function(req, res) {
 }
 
 async function writeSmileyToDb(dataToWrite, entryObjId) {
-    console.log("Writing smiley to db")
-
     var newEntry = new Entry({
         start_smiley: parseInt(dataToWrite['startSmiley']),
         date_of_entry: new Date(),
