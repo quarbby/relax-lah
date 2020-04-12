@@ -18,6 +18,7 @@ exports.index = function(req, res) {
 
 exports.show_page = function(req, res) {
     const pageType = req.body.pageType;
+    console.log(pageType)
 
     switch(pageType) {
         case PAGECONTROLLER_TYPE_ENUM.STARTSMILEY:
@@ -41,6 +42,12 @@ exports.show_page = function(req, res) {
             break;
 
         case PAGECONTROLLER_TYPE_ENUM.FEEDBACK:
+            console.log('are we at final stage?')
+
+            if (req.body.feedbackText == '') {
+                res.render('bye');
+            }
+
             var statusCode = writeIntoDb(req.body, entryObjId);
             console.log(statusCode);
             res.render('bye');

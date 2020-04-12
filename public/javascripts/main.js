@@ -109,10 +109,15 @@ function worrySubmitted() {
     else if (GLOBAL_PAGETYPE == PAGETYPE_ENUM.FEEDBACK) {
         var numFadedSmiley = $('.smiley.faded').length;
         
-        if (inputText != '' && numFadedSmiley == 4) {
-            dataToSend['feedbackText'] = inputText;
-            dataToSend['pageType'] = PAGETYPE_ENUM.FEEDBACK;
+        dataToSend['pageType'] = PAGETYPE_ENUM.FEEDBACK;
 
+        if (numFadedSmiley != 4) {
+            $('#additional-text').text(endSmileyEmpty);
+        }
+        else {
+            if (inputText != '' && numFadedSmiley == 4) {
+                dataToSend['feedbackText'] = inputText;
+            }
             $.ajax({
                 url: "/",
                 method: "POST",
@@ -128,12 +133,6 @@ function worrySubmitted() {
                 console.log(error);
             });
             });
-        }
-        // else if (inputText == '') {
-        //     $('#additional-text').text(feedbackTextEmpty);
-        // }
-        else if (numFadedSmiley != 4) {
-            $('#additional-text').text(endSmileyEmpty);
         }
     }
 }
