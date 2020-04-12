@@ -68,11 +68,12 @@ function worrySubmitted() {
         if (inputText != '') {
             dataToSend['entryText'] = inputText;
             dataToSend['endDate'] = Date.now();
+            dataToSend['pageType'] = GLOBAL_PAGETYPE;
 
             $.ajax({
                 url: "/",
                 method: "POST",
-                data: {pageType: GLOBAL_PAGETYPE},
+                data: dataToSend,
                 async: false
             }).done(function(response){
                 // $('#body-container').replaceWith(response);
@@ -92,7 +93,9 @@ function worrySubmitted() {
     }
 
     else if (GLOBAL_PAGETYPE == PAGETYPE_ENUM.FEEDBACK) {
-        if (inputText != '') {
+        var numFadedSmiley = $('.smiley.faded').length;
+        
+        if (inputText != '' && numFadedSmiley == 4) {
             dataToSend['feedbackText'] = inputText;
             dataToSend['pageType'] = PAGETYPE_ENUM.FEEDBACK;
 
@@ -112,8 +115,11 @@ function worrySubmitted() {
             });
             });
         }
-        else {
+        else if (inputText == '') {
             $('#additional-text').text(feedbackTextEmpty);
+        }
+        else if (numFadedSmiley != 4) {
+            $('#additional-text').text(endSmileyEmpty);
         }
     }
 }
@@ -149,18 +155,12 @@ function performRelaxationactivityOld() {
     let delay = 0;
     meditationTextWithTiming.forEach((step, i) => {
         setTimeout(() => {
-           // console.log(delay);
             let timing = step.timing;
             let text = step.text;
             let stepTiming = step.stepTiming;
 
-            // delay += timing;
-            // delay += i;
             delay = i;
             let mediHTML = "<div id='meditation-text'>" + text + "</div>";
-            // if (i == meditationTextWithTiming.length - 1) {
-            //     mediHTML += "<div id='meditation-button'>Continue</div>";
-            // }
 
             $('#meditation-text').fadeOut("slow", function(){
                 var div = $(mediHTML).hide();
@@ -207,11 +207,13 @@ function setMeditationText(text, stepTiming, isDone) {
     mediHTML += "<p id='relax-timing'>" + stepTiming + "</p>"
     mediHTML += "</div>";
 
-    console.log(mediHTML)
-
     $('#meditation-div').fadeOut("slow", function(){
         var div = $(mediHTML).hide();
         $(this).replaceWith(div);
+
+        if (isDone) {
+            $('#relax-timing').text('');
+        }
 
         var stepTimingCounter = stepTiming;
 

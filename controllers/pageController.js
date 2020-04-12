@@ -9,6 +9,8 @@ const PAGECONTROLLER_TYPE_ENUM = {
     BYE: 'bye'
 }
 
+var entryObjId = undefined;
+
 exports.index = function(req, res) {   
     res.render('index', { title: 'Relax Lah' });
 };
@@ -18,10 +20,14 @@ exports.show_page = function(req, res) {
 
     switch(pageType) {
         case PAGECONTROLLER_TYPE_ENUM.STARTSMILEY:
+            entryObjId = undefined;
             res.render('worry');
             break;
 
         case PAGECONTROLLER_TYPE_ENUM.WORRY:
+            console.log(req.body.endDate);
+            entryObjId = parseInt(req.body.endDate);
+            writeWorryToDb(req.body, entryObjId);
             res.render('meditation');
             break;
 
@@ -30,7 +36,9 @@ exports.show_page = function(req, res) {
             break;
         
         case PAGECONTROLLER_TYPE_ENUM.FEEDBACK:
-            writeIntoDb(req.body, res);
+            console.log('feedback id: ' + entryObjId)
+
+            writeIntoDb(req.body, res, entryObjId);
             res.render('bye');
             break;
 
@@ -40,25 +48,52 @@ exports.show_page = function(req, res) {
     }
 }
 
-function writeIntoDb(dataToWrite, res) {
+async function writeWorryToDb(dataToWrite, entryObjId) {
+    var newEntry = new Entry({
+        entry_text: dataToWrite['entryText'],
+        start_smiley: parseInt(dataToWrite['startSmiley']),
+        date_of_entry: new Date(),
+        date_of_start: dataToWrite['startDate'],
+        date_of_end: dataToWrite['endDate'],
+        _id: entryObjId
+    });
+    newEntry.save()
+        .then(item => {
+        console.log("item saved to database");
+
+        entryObjId = newEntry._id;
+        console.log('new entry id: ' + entryObjId)
+        return entryObjId;
+    })
+        .catch(err => {
+        console.log(err);
+        return undefined;
+    });
+}
+
+function writeIntoDb(dataToWrite, res, entryObjId) {
+    console.log('final writing: ' + entryObjId);
+
+    var query = {_id: entryObjId};
+
     var newEntry = new Entry({
         entry_text: dataToWrite['entryText'],
         feedback: dataToWrite['feedback'],
         start_smiley: parseInt(dataToWrite['startSmiley']),
         end_smiley: parseInt(dataToWrite['endSmiley']),
-        relaxation_activity: dataToWrite['relaxActivity'],
         date_of_entry: new Date(),
         date_of_start: dataToWrite['startDate'],
-        date_of_end: dataToWrite['endDate']
+        date_of_end: dataToWrite['endDate'],
+        _id: entryObjId
     });
 
-    newEntry.save()
-        .then(item => {
-        console.log("item saved to database");
-        res.sendStatus(200);
-    })
-        .catch(err => {
-        console.log(err);
-        res.sendStatus(500);
+    newEntry.findOneAndUpdate(query, newEntry, {upsert: true}, function(err, doc) {
+        console.log(doc)
+        if (err) {
+            console.log(err)
+            return res.send(500, {error: err});
+        }
+        return res.send('Succesfully saved.');
     });
+
 }
