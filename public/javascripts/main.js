@@ -214,14 +214,11 @@ function setMeditationText(text, stepTiming, isDone) {
         $(this).replaceWith(div);
 
         var stepTimingCounter = stepTiming;
-        console.log('step timing ' + stepTimingCounter);
 
-        console.log("current timer " + stepTimingCounter)
         $('#relax-timing').text(stepTimingCounter);
         stepTimingCounter = stepTimingCounter - 1;
 
         var relaxTimer = setInterval(() => {
-            console.log("current timer " + stepTimingCounter)
             $('#relax-timing').text(stepTimingCounter);
             stepTimingCounter = stepTimingCounter - 1;
 
