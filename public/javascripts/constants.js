@@ -22,12 +22,12 @@ const meditationTextWithTiming = [
     {
         timing: 10,
         text: "Take a seat or get into a comfortable position",
-        stepTiming: -1
+        stepTiming: 2
     },
     {
         timing: 10,
         text: "Spend the next few seconds noticing your breathing",
-        stepTiming: -1
+        stepTiming: 2
     },
     {
         timing: 8,
@@ -47,7 +47,7 @@ const meditationTextWithTiming = [
     {
         timing: 7,
         text: "It's okay if you didn't get it the first time. Let's try again",
-        stepTiming: -1
+        stepTiming: 2
     },
     {
         timing: 8,
@@ -66,7 +66,8 @@ const meditationTextWithTiming = [
     },
     {
         timing: 10,
-        text: "You're getting it, let's do it once more"
+        text: "You're getting it, let's do it once more",
+        stepTiming: 2
     },
     {
         timing: 8,
@@ -86,6 +87,6 @@ const meditationTextWithTiming = [
     {
         timing: 7,
         text: "And there you go.",
-        stepTiming: -1
+        stepTiming: 2
     },
 ]

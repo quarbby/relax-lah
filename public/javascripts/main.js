@@ -145,7 +145,7 @@ function relaxDone() {
     });
 }
 
-function performRelaxationactivity() {
+function performRelaxationactivityOld() {
     let delay = 0;
     meditationTextWithTiming.forEach((step, i) => {
         setTimeout(() => {
@@ -184,9 +184,40 @@ function performRelaxationactivity() {
                         })
                     }
                 });
-                
             });
         }, i * 11000);
+    });
+}
+
+function performRelaxationactivity() {
+    var totalLength = meditationTextWithTiming.length;
+
+    meditationTextWithTiming.forEach((step, i) => {
+        setTimeout(() => {
+            if (i == totalLength-1) { isDone = true; }
+            else { isDone = false; }
+
+            setMeditationText(step.text, isDone);
+        }, step.stepTiming*1000);
+    });
+}
+
+function setMeditationText(text, isDone) {
+    let mediHTML = "<div id='meditation-text'>" + text + "</div>";
+
+    console.log(mediHTML)
+
+    $('#meditation-text').fadeOut("slow", function(){
+        var div = $(mediHTML).hide();
+        $(this).replaceWith(div);
+
+        $('#meditation-text').fadeIn("slow", function() {
+            if (isDone) {
+                $('#body-container').append("<button id='meditation-button' class='btn btn-primary'>Continue</button>").fadeIn("slow", function(){
+                    $('#body-container').on("click", '#meditation-button', () => relaxDone());
+                })
+            }
+        });
     });
 }
 
