@@ -27,8 +27,8 @@ app.use(function(req, res, next) {
 });
 
 // Connect to mongoose
-var mongoDB = process.env.MONGODB_URI || 'mongodb://127.0.0.1/entries';
-mongoose.connect(mongoDB, { useNewUrlParser: true, useFindAndModify: true });
+var mongoDB = 'mongodb+srv://bluesky:Raffles@clustertester-cww0i.mongodb.net/test?retryWrites=true&w=majority';
+mongoose.connect(mongoDB, { useNewUrlParser: true, useFindAndModify: true  });
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
