@@ -207,18 +207,20 @@ function setMeditationText(text, stepTiming, isDone) {
     mediHTML += "<p id='relax-timing'>" + stepTiming + "</p>"
     mediHTML += "</div>";
 
-    $('#meditation-text').fadeOut("slow", function(){
+    console.log(mediHTML)
+
+    $('#meditation-div').fadeOut("slow", function(){
         var div = $(mediHTML).hide();
         $(this).replaceWith(div);
 
-        var stepTimingCounter = stepTiming;
+        // var stepTimingCounter = stepTiming;
 
-        setTimeout(() => {
-            $('#relax-timing').text(stepTimingCounter);
-            stepTimingCounter--;
-        }, stepTiming*1000 );
+        // setTimeout(() => {
+        //     $('#relax-timing').text(stepTimingCounter);
+        //     stepTimingCounter--;
+        // }, stepTiming*1000 );
 
-        $('#meditation-text').fadeIn("slow", function() {
+        $('#meditation-div').fadeIn("slow", function() {
             if (isDone) {
                 $('#body-container').append("<button id='meditation-button' class='btn btn-primary'>Continue</button>").fadeIn("slow", function(){
                     $('#body-container').on("click", '#meditation-button', () => relaxDone());
