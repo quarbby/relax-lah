@@ -42,12 +42,14 @@ exports.show_page = function(req, res) {
 
         case PAGECONTROLLER_TYPE_ENUM.FEEDBACK:
             var statusCode = writeIntoDb(req.body, entryObjId);
-            if (statusCode == 200) {
-                res.render('bye');
-            }
-            else if (statusCode == 500) {
-                res.render('error');
-            }
+            console.log(statusCode);
+            res.render('bye');
+            // if (statusCode == 200) {
+            //     res.render('bye');
+            // }
+            // else if (statusCode == 500) {
+            //     res.render('error');
+            // }
             entryObjId = undefined;
             break;
 
@@ -108,6 +110,10 @@ async function writeFeedbackSmileyIntoDb(dataToWrite, entryObjId) {
 }
 
 function writeIntoDb(dataToWrite, entryObjId) {
+    if (!('feedbackText' in dataToWrite)) {
+        dataToWrite['feedbackText'] = '';
+    }
+
     var newEntry = new Entry({
         entry_text: dataToWrite['entryText'],
         feedback: dataToWrite['feedbackText'],

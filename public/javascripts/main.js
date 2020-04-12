@@ -62,7 +62,6 @@ function smileyBtnClicked(smileyNumber) {
         });
 
         dataToSend['pageType'] = PAGETYPE_ENUM.FEEDBACKSMILEY;
-
         $.ajax({
             url: "/",
             method: "POST",
@@ -73,7 +72,6 @@ function smileyBtnClicked(smileyNumber) {
         }).fail(function(error){
             console.log(error);
     });
-
     }
 }
 
@@ -121,6 +119,7 @@ function worrySubmitted() {
                 data: dataToSend,
                 async: false
             }).done(function(response){
+                console.log(response);
                $('#body-container').fadeOut("slow", function(){
                 var div = $(response).hide();
                 $(this).replaceWith(div);
