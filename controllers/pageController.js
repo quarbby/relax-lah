@@ -110,7 +110,7 @@ async function writeFeedbackSmileyIntoDb(dataToWrite, entryObjId) {
 function writeIntoDb(dataToWrite, entryObjId) {
     var newEntry = new Entry({
         entry_text: dataToWrite['entryText'],
-        feedback: dataToWrite['feedback'],
+        feedback: dataToWrite['feedbackText'],
         start_smiley: parseInt(dataToWrite['startSmiley']),
         end_smiley: parseInt(dataToWrite['endSmiley']),
         date_of_entry: new Date(),
