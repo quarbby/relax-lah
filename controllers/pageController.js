@@ -36,10 +36,13 @@ exports.show_page = function(req, res) {
             break;
         
         case PAGECONTROLLER_TYPE_ENUM.FEEDBACK:
-            console.log('feedback id: ' + entryObjId)
-
-            writeIntoDb(req.body, res, entryObjId);
-            res.render('bye');
+            var statusCode = writeIntoDb(req.body, res, entryObjId);
+            if (statusCode == 200) {
+                res.render('bye');
+            }
+            else if (statusCode == 500) {
+                res.render('error');
+            }
             break;
 
         default:
@@ -87,13 +90,12 @@ function writeIntoDb(dataToWrite, res, entryObjId) {
         _id: entryObjId
     });
 
-    newEntry.findOneAndUpdate(query, newEntry, {upsert: true}, function(err, doc) {
-        console.log(doc)
+    Entry.findOneAndUpdate(query, newEntry, {upsert: true}, function(err, doc) {
         if (err) {
-            console.log(err)
-            return res.send(500, {error: err});
+            console.log(err);
+            return 500;
         }
-        return res.send('Succesfully saved.');
+        return 200;
     });
 
 }

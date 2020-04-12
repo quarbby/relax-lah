@@ -12,6 +12,7 @@ const smileyHeaderEnd = 'We hope you\'re feeling better';
 const worryTextEmpty = 'Come on, let your troubles out';
 const feedbackTextEmpty = 'Really? Nothing?';
 const endSmileyEmpty = 'Please rate how the relaxation activity has help you.';
+const feedbackPlaceholder = 'A little improvement tip, please?';
 const feedbackDone = 'Thank you for your feedback!';
 const feedbackError = 'Uhoh Error. Please try again when the server is more sane';
 

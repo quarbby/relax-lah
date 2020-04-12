@@ -253,5 +253,6 @@ function changePageType() {
         $('#smileyHeader').text(smileyHeaderEnd);
         $('#worryHeader').text(feedbackHeader);
         $('#worry-btn').text(feedbackBtnText);
+        $('#worry-text').placeHolder = feedbackPlaceholder;
     }
 }
