@@ -45,7 +45,7 @@ const meditationTextWithTiming = [
     },
     {
         timing: 13,
-        text: "Now, slowly breathe out with your mouth in the next 10 seconds",
+        text: "Now, slowly breathe out with your mouth for the next 10 seconds",
         stepTiming: 10,
         timingDelay: 13
     },

@@ -198,7 +198,7 @@ function performRelaxationactivity() {
             else { isDone = false; }
 
             setMeditationText(step.text, step.stepTiming, isDone);
-        }, step.timingDelay*1000);
+        }, step.timingDelay*1500);
     });
 }
 
@@ -228,7 +228,7 @@ function setMeditationText(text, stepTiming, isDone) {
             if (stepTimingCounter == 0) {
                 clearInterval(relaxTimer);
             }
-        }, 1000 );
+        }, 1500 );
 
         $('#meditation-div').fadeIn("slow", function() {
             if (isDone) {
