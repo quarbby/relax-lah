@@ -6,6 +6,7 @@ const PAGECONTROLLER_TYPE_ENUM = {
     RELAX: 'relax',
     MEDITATION: 'meditation',
     FEEDBACK: 'feedback',
+    FEEDBACK_SMILEY: 'feedbackSmiley',
     BYE: 'bye'
 }
 
@@ -20,13 +21,12 @@ exports.show_page = function(req, res) {
 
     switch(pageType) {
         case PAGECONTROLLER_TYPE_ENUM.STARTSMILEY:
-            entryObjId = undefined;
+            entryObjId = parseInt(req.body.startDate);
+            writeSmileyToDb(req.body, entryObjId);
             res.render('worry');
             break;
 
         case PAGECONTROLLER_TYPE_ENUM.WORRY:
-            console.log(req.body.endDate);
-            entryObjId = parseInt(req.body.endDate);
             writeWorryToDb(req.body, entryObjId);
             res.render('meditation');
             break;
@@ -35,14 +35,19 @@ exports.show_page = function(req, res) {
             res.render('final');
             break;
         
+        case PAGECONTROLLER_TYPE_ENUM.FEEDBACK_SMILEY:
+            writeFeedbackSmileyIntoDb(req.body, entryObjId);
+            break;
+
         case PAGECONTROLLER_TYPE_ENUM.FEEDBACK:
-            var statusCode = writeIntoDb(req.body, res, entryObjId);
+            var statusCode = writeIntoDb(req.body, entryObjId);
             if (statusCode == 200) {
                 res.render('bye');
             }
             else if (statusCode == 500) {
                 res.render('error');
             }
+            entryObjId = undefined;
             break;
 
         default:
@@ -51,13 +56,13 @@ exports.show_page = function(req, res) {
     }
 }
 
-async function writeWorryToDb(dataToWrite, entryObjId) {
+async function writeSmileyToDb(dataToWrite, entryObjId) {
+    console.log("Writing smiley to db")
+
     var newEntry = new Entry({
-        entry_text: dataToWrite['entryText'],
         start_smiley: parseInt(dataToWrite['startSmiley']),
         date_of_entry: new Date(),
         date_of_start: dataToWrite['startDate'],
-        date_of_end: dataToWrite['endDate'],
         _id: entryObjId
     });
     newEntry.save()
@@ -74,11 +79,36 @@ async function writeWorryToDb(dataToWrite, entryObjId) {
     });
 }
 
-function writeIntoDb(dataToWrite, res, entryObjId) {
-    console.log('final writing: ' + entryObjId);
+async function writeWorryToDb(dataToWrite, entryObjId) {
+    var newEntry = new Entry({
+        entry_text: dataToWrite['entryText'],
+        start_smiley: parseInt(dataToWrite['startSmiley']),
+        date_of_entry: new Date(),
+        date_of_start: dataToWrite['startDate'],
+        date_of_end: dataToWrite['endDate'],
+        _id: entryObjId
+    });
 
-    var query = {_id: entryObjId};
+    var responseStatus = findEntryAndUpdate(newEntry, entryObjId);
+    return responseStatus;
+}
 
+async function writeFeedbackSmileyIntoDb(dataToWrite, entryObjId) {
+    var newEntry = new Entry({
+        entry_text: dataToWrite['entryText'],
+        start_smiley: parseInt(dataToWrite['startSmiley']),
+        end_smiley: parseInt(dataToWrite['endSmiley']),
+        date_of_entry: new Date(),
+        date_of_start: dataToWrite['startDate'],
+        date_of_end: dataToWrite['endDate'],
+        _id: entryObjId
+    });
+
+    var responseStatus = findEntryAndUpdate(newEntry, entryObjId);
+    return responseStatus;
+}
+
+function writeIntoDb(dataToWrite, entryObjId) {
     var newEntry = new Entry({
         entry_text: dataToWrite['entryText'],
         feedback: dataToWrite['feedback'],
@@ -90,6 +120,13 @@ function writeIntoDb(dataToWrite, res, entryObjId) {
         _id: entryObjId
     });
 
+    var responseStatus = findEntryAndUpdate(newEntry, entryObjId);
+    return responseStatus;
+}
+
+function findEntryAndUpdate(newEntry, entryObjId) {
+    var query = {_id: entryObjId};
+
     Entry.findOneAndUpdate(query, newEntry, {upsert: true}, function(err, doc) {
         if (err) {
             console.log(err);
@@ -97,5 +134,4 @@ function writeIntoDb(dataToWrite, res, entryObjId) {
         }
         return 200;
     });
-
 }

@@ -17,11 +17,12 @@ function smileyBtnClicked(smileyNumber) {
     if (GLOBAL_PAGETYPE == PAGETYPE_ENUM.STARTSMILEY) {
         dataToSend['startDate'] =  Date.now();
         dataToSend['startSmiley'] = smileyNumber;
+        dataToSend['pageType'] = GLOBAL_PAGETYPE;
 
         $.ajax({
             url: "/",
             method: "POST",
-            data: {pageType: GLOBAL_PAGETYPE},
+            data: dataToSend,
             async: false
         }).done(function(response){
             // $('#body-container').replaceWith(response);
@@ -37,6 +38,7 @@ function smileyBtnClicked(smileyNumber) {
     }
     else if (GLOBAL_PAGETYPE == PAGETYPE_ENUM.FEEDBACK) { 
         dataToSend['endSmiley'] = smileyNumber;
+
         let smileyHTML = "<div id='smiley-holder'>";
         for (let i = 0; i < 5; i++) {
             let currentNumber = i + 1;
@@ -58,6 +60,20 @@ function smileyBtnClicked(smileyNumber) {
                 }
             });
         });
+
+        dataToSend['pageType'] = PAGETYPE_ENUM.FEEDBACKSMILEY;
+
+        $.ajax({
+            url: "/",
+            method: "POST",
+            data: dataToSend,
+            async: false
+        }).done(function(response){
+            $('#additional-text').text(endSmileySuccess);
+        }).fail(function(error){
+            console.log(error);
+    });
+
     }
 }
 
@@ -105,7 +121,6 @@ function worrySubmitted() {
                 data: dataToSend,
                 async: false
             }).done(function(response){
-               // $('#additional-text').text(feedbackError);
                $('#body-container').fadeOut("slow", function(){
                 var div = $(response).hide();
                 $(this).replaceWith(div);
@@ -115,21 +130,13 @@ function worrySubmitted() {
             });
             });
         }
-        else if (inputText == '') {
-            $('#additional-text').text(feedbackTextEmpty);
-        }
+        // else if (inputText == '') {
+        //     $('#additional-text').text(feedbackTextEmpty);
+        // }
         else if (numFadedSmiley != 4) {
             $('#additional-text').text(endSmileyEmpty);
         }
     }
-}
-
-function getCurrentTime() {
-    var today = new Date();
-    var date = today.getFullYear()+'-' + (today.getMonth()+1) + '-' + today.getDate();
-    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-
-    return date + 'T' + time;
 }
 
 function relaxDone() {
@@ -150,45 +157,6 @@ function relaxDone() {
         console.log(error);
     });
 }
-
-function performRelaxationactivityOld() {
-    let delay = 0;
-    meditationTextWithTiming.forEach((step, i) => {
-        setTimeout(() => {
-            let timing = step.timing;
-            let text = step.text;
-            let stepTiming = step.stepTiming;
-
-            delay = i;
-            let mediHTML = "<div id='meditation-text'>" + text + "</div>";
-
-            $('#meditation-text').fadeOut("slow", function(){
-                var div = $(mediHTML).hide();
-                $(this).replaceWith(div);
-
-                let stepHTML = "<div id='relax-timing'></div>";
-                $('#body-container').append(stepHTML);
-
-                if (stepTiming != -1) {
-                    setInterval(function(){
-                        $('#relax-timing').text(stepTiming);
-    
-                        stepTiming = stepTiming - 1;
-                    }, stepTiming*1000);
-                }
-
-                $('#meditation-text').fadeIn("slow", function() {
-                    if (i == meditationTextWithTiming.length - 1) {
-                        $('#body-container').append("<button id='meditation-button' class='btn btn-primary'>Continue</button>").fadeIn("slow", function(){
-                            $('#body-container').on("click", '#meditation-button', () => relaxDone());
-                        })
-                    }
-                });
-            });
-        }, i * 11000);
-    });
-}
-
 function performRelaxationactivity() {
     var totalLength = meditationTextWithTiming.length;
 
