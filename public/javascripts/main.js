@@ -197,19 +197,26 @@ function performRelaxationactivity() {
             if (i == totalLength-1) { isDone = true; }
             else { isDone = false; }
 
-            setMeditationText(step.text, isDone);
+            setMeditationText(step.text, step.stepTiming, isDone);
         }, step.stepTiming*1000);
     });
 }
 
-function setMeditationText(text, isDone) {
-    let mediHTML = "<div id='meditation-text'>" + text + "</div>";
-
-    console.log(mediHTML)
+function setMeditationText(text, stepTiming, isDone) {
+    let mediHTML = "<div id='meditation-div'><p id='meditation-text'>" + text + "</p>";
+    mediHTML += "<p id='relax-timing'>" + stepTiming + "</p>"
+    mediHTML += "</div>";
 
     $('#meditation-text').fadeOut("slow", function(){
         var div = $(mediHTML).hide();
         $(this).replaceWith(div);
+
+        var stepTimingCounter = stepTiming;
+
+        setTimeout(() => {
+            $('#relax-timing').text(stepTimingCounter);
+            stepTimingCounter--;
+        }, stepTiming*1000 );
 
         $('#meditation-text').fadeIn("slow", function() {
             if (isDone) {

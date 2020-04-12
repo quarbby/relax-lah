@@ -121,6 +121,10 @@ body {
 
 /* Meditation Page */
 
+#meditation-div {
+  text-align: center;
+}
+
 #meditation-text {
   text-align: center;
   font-size: 8vh;
