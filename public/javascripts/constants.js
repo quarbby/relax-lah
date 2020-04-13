@@ -8,7 +8,7 @@ const PAGETYPE_ENUM = {
 }
 
 const smileyHeaderStart = 'How are you feeling today?';
-const smileyHeaderEnd = 'We hope you\'re feeling better';
+const smileyHeaderEnd = 'How do you feel now?';
 
 const worryTextEmpty = 'Come on, let your troubles out';
 const feedbackTextEmpty = 'Really? Nothing?';
@@ -24,87 +24,86 @@ const feedbackBtnText = 'Here\'s my feedback!'
 
 const meditationTextWithTiming = [
     {
-        timing: 10,
         text: "Take a seat or get into a comfortable position",
-        stepTiming: 2,
-        timingDelay: 0
+        stepTiming: 10,
+        timingDelay: 10
     },
     {
-        timing: 10,
         text: "Spend the next few seconds noticing your breathing",
-        stepTiming: 2,
-        timingDelay: 2
+        stepTiming: 5,
+        showTimer: false,
+        timingDelay: 5
     },
     {
-        timing: 8,
         text: "Now, breathe through your nose for the next 5 seconds",
         stepTiming: 5,
-        timingDelay: 4
+        showTimer: false,
+        timingDelay: 10
     },
     {
-        timing: 5,
         text: "Hold it for the next 4 seconds",
         stepTiming: 4,
-        timingDelay: 9
+        showTimer: true,
+        timingDelay: 14
     },
     {
-        timing: 13,
         text: "Now, slowly breathe out with your mouth for the next 10 seconds",
         stepTiming: 10,
-        timingDelay: 13
+        showTimer: true,
+        timingDelay: 24
     },
     {
-        timing: 7,
         text: "It's okay if you didn't get it the first time. Let's try again",
         stepTiming: 2,
-        timingDelay: 23
+        showTimer: true,
+        timingDelay: 26
     },
     {
-        timing: 8,
         text: "Breathe in through your nose for the next 5 seconds",
         stepTiming: 5,
-        timingDelay: 25
+        showTimer: true,
+        timingDelay: 31
     },
     {
-        timing: 5,
         text: "Hold it for the next 4 seconds",
         stepTiming: 4,
-        timingDelay: 30
+        showTimer: true,
+        timingDelay: 35
     },
     {
-        timing: 12,
         text: "Slowly exhale with your mouth for the next 10 seconds",
         stepTiming: 10,
-        timingDelay: 34
+        showTimer: true,
+        timingDelay: 45
     },
     {
-        timing: 10,
         text: "You're getting it, let's do it once more",
-        stepTiming: 2,
-        timingDelay: 44
+        stepTiming: 5,
+        timingDelay: 55,
+        showTimer: false
     },
     {
-        timing: 8,
         text: "Breathe in through your nose for the next 5 seconds",
         stepTiming: 5,
-        timingDelay: 49
+        timingDelay: 60,
+        showTimer: true
     },
     {
-        timing: 5,
         text: "Hold it for the next 4 seconds",
         stepTiming: 4,
-        timingDelay: 54
+        timingDelay: 64,
+        showTimer: true
     },
     {
-        timing: 12,
         text: "Slowly exhale with your mouth for the next 10 seconds",
         stepTiming: 10,
-        timingDelay: 64
+        timingDelay: 74,
+        showTimer: true
     },
     {
-        timing: 7,
         text: "And there you go.",
-        stepTiming: 2,
-        timingDelay: 74
+        stepTiming: 5,
+        timingDelay: 79,
+        showTimer: false
     },
 ]

@@ -183,7 +183,10 @@ function setMeditationText(text, stepTiming, isDone) {
 
         var stepTimingCounter = stepTiming;
 
-        $('#relax-timing').text(stepTimingCounter);
+        if (step.showTimer) {
+            $('#relax-timing').text(stepTimingCounter);
+        }
+        
         stepTimingCounter = stepTimingCounter - 1;
 
         var relaxTimer = setInterval(() => {
