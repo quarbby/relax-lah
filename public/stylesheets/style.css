@@ -59,8 +59,8 @@ body {
   display: grid;
   justify-self: center;
   background-size: cover;
-  height: 13vw;
-  width: 13vw;
+  height: 13vh;
+  width: 13vh;
   cursor: pointer;
   border-radius: 13vh;
   box-shadow: 0.2vh 0.2vh 0.3vh #222222;
