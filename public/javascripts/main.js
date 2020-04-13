@@ -164,7 +164,9 @@ function performRelaxationactivity() {
 
 function setMeditationText(text, stepTiming, showTimer, isDone) {
     let mediHTML = "<div id='meditation-div'><p id='meditation-text'>" + text + "</p>";
-    mediHTML += "<p id='relax-timing'>" + stepTiming + "</p>"
+    if(showTimer) {
+        mediHTML += "<p id='relax-timing'>" + stepTiming + "</p>"
+    }
     mediHTML += "</div>";
 
     $('#meditation-div').fadeOut("slow", function(){
