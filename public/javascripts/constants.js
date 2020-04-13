@@ -27,7 +27,7 @@ const meditationTextWithTiming = [
         text: "Take a seat or get into a comfortable position",
         stepTiming: 5,
         showTimer: false,
-        timingDelay: 5
+        timingDelay: 0
     },
     {
         text: "Spend the next few seconds noticing your breathing",
@@ -38,7 +38,7 @@ const meditationTextWithTiming = [
     {
         text: "Now, breathe through your nose for the next 5 seconds",
         stepTiming: 5,
-        showTimer: false,
+        showTimer: true,
         timingDelay: 15
     },
     {
