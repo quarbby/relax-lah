@@ -199,7 +199,6 @@ function setMeditationText(text, stepTiming, showTimer, isDone) {
                 if (stepTimingCounter == 0) {
                     clearInterval(relaxTimer);
                 }
-            }
         }, 1500 );
 
         $('#meditation-div').fadeIn("slow", function() {
