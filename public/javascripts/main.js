@@ -187,14 +187,16 @@ function setMeditationText(text, stepTiming, showTimer, isDone) {
 
         var stepTimingCounter = stepTiming;
 
-        if (showTimer) {
-            $('#relax-timing').text(stepTimingCounter);
-        }
+        // if (showTimer) {
+        //     $('#relax-timing').text(stepTimingCounter);
+        // }
 
         stepTimingCounter = stepTimingCounter - 1;
 
         var relaxTimer = setInterval(() => {
-            $('#relax-timing').text(stepTimingCounter);
+            if (showTimer) {
+                $('#relax-timing').text(stepTimingCounter);
+            }
             stepTimingCounter = stepTimingCounter - 1;
 
             if (stepTimingCounter == 0) {

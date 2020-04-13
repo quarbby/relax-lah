@@ -33,13 +33,13 @@ exports.show_page = function(req, res) {
             break;
 
         case PAGECONTROLLER_TYPE_ENUM.MEDITATION:
-            res.render('final');
+            res.render('smiles');
             break;
         
         case PAGECONTROLLER_TYPE_ENUM.FEEDBACK_SMILEY:
             var statusCode = writeFeedbackSmileyIntoDb(req.body, entryObjId);
             //res.send(statusCode.toString());
-            res.render('smiles');
+            res.render('worry');
             break;
 
         case PAGECONTROLLER_TYPE_ENUM.FEEDBACK:
@@ -48,7 +48,6 @@ exports.show_page = function(req, res) {
             }
 
             var statusCode = writeIntoDb(req.body, entryObjId);
-            console.log(statusCode);
             res.render('bye');
             // if (statusCode == 200) {
             //     res.render('bye');
