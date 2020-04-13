@@ -206,7 +206,7 @@ function setMeditationText(text, stepTiming, showTimer, isDone) {
 
         $('#meditation-div').fadeIn("slow", function() {
             if (isDone) {
-                $('#body-container').append("<button id='meditation-button' class='btn btn-primary'>Continue</button>").fadeIn("slow", function(){
+                $('#body-container').append("<button id='meditation-button' class='btn btn-blue-grey custom-btn'>Continue</button>").fadeIn("slow", function(){
                     $('#body-container').on("click", '#meditation-button', () => relaxDone());
                 })
             }
