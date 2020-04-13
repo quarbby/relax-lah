@@ -56,7 +56,7 @@ const meditationTextWithTiming = [
     {
         text: "It's okay if you didn't get it the first time. Let's try again",
         stepTiming: 4,
-        showTimer: true,
+        showTimer: false,
         timingDelay: 29
     },
     {

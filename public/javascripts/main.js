@@ -164,9 +164,12 @@ function performRelaxationactivity() {
 
 function setMeditationText(text, stepTiming, showTimer, isDone) {
     let mediHTML = "<div id='meditation-div'><p id='meditation-text'>" + text + "</p>";
-    if(showTimer) {
+    if (showTimer) {
         mediHTML += "<p id='relax-timing'>" + stepTiming + "</p>"
+    } else {
+        mediHTML += "<p id='relax-timing'></p>"
     }
+
     mediHTML += "</div>";
 
     $('#meditation-div').fadeOut("slow", function(){
@@ -177,13 +180,10 @@ function setMeditationText(text, stepTiming, showTimer, isDone) {
             $('#relax-timing').text('');
         }
 
-        var stepTimingCounter = stepTiming;
+        var stepTimingCounter = stepTiming - 1;
+        var stepTimingNoWordCounter = 0;
 
-        // if (showTimer) {
-        //     $('#relax-timing').text(stepTimingCounter);
-        // }
-
-        stepTimingCounter = stepTimingCounter - 1;
+        // stepTimingCounter = stepTimingCounter - 1;
 
         var relaxTimer = setInterval(() => {
             if (showTimer) {
@@ -196,8 +196,9 @@ function setMeditationText(text, stepTiming, showTimer, isDone) {
 
             stepTimingCounter = stepTimingCounter - 1;
 
-            if (stepTimingCounter == 0) {
-                clearInterval(relaxTimer);
+                if (stepTimingCounter == 0) {
+                    clearInterval(relaxTimer);
+                }
             }
         }, 1500 );
 
