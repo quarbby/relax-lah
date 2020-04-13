@@ -71,7 +71,7 @@ body {
   /* display: grid; */
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   align-items: center;
-  margin-left: 150px;
+  margin-left: 100px;
 }
 
 .smiley-1 {
@@ -132,7 +132,7 @@ body {
 .custom-btn {
   opacity: 0.8;
   color: black;
-  height: 4vh;
+  height: 6vh;
   font-size: 2em;
   font-weight: bold;
 }
