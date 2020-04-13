@@ -41,6 +41,18 @@ body {
   font-size: 8vh;
 }
 
+/* Audio */
+#audio-iframe {
+  position: absolute;
+  left: -9999px;
+}
+
+#background-audio {
+  position: absolute;
+  left: -9999px;
+  /* visibility: hidden; */
+}
+
 /* Smileys */
 
 .smiley {
