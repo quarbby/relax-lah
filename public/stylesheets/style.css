@@ -30,7 +30,7 @@ body {
 .heropic {
   background-image: url(../images/Aurora.jpg);
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: auto;
   height: 100vh;
   color: #FFFFF0;
   -webkit-filter: saturate(200%);
@@ -127,6 +127,14 @@ body {
   color: #FFFFF0;
   background: #222222;
   opacity: 0.5;
+}
+
+.custom-btn {
+  opacity: 0.8;
+  color: black;
+  height: 4vh;
+  font-size: 2em;
+  font-weight: bold;
 }
 
 .input-overlay {

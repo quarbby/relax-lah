@@ -1,11 +1,13 @@
 block content
-    div#body-container
-        div#worryHeader(class='title') It's okay to not feel okay. Rant below and watch it vanish, like magic 
+    div#body-container(class="row")
+        div#worryHeader(class='title') 
+            | It's okay to not feel okay.
+            | Rant below and watch it vanish, like magic 
 
         div#worry-form
             textarea#worry-text(name="worry-text-input", placeholder='Type Your Worries Away!', cols="30", rows="10")
             //- span(class='input-overlay')
 
-        button.btn.btn-primary#worry-btn(onclick="worrySubmitted()") Take my worries away
+        button.btn.btn-blue-grey.custom-btn#worry-btn(onclick="worrySubmitted()") Take my worries away!
 
         div#additional-text
