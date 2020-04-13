@@ -14,6 +14,28 @@ var startLoop = 1;
 // }
 
 function smileyBtnClicked(smileyNumber) {
+    let smileyHTML = "<div id='smiley-holder'>";
+    for (let i = 0; i < 5; i++) {
+        let currentNumber = i + 1;
+        let buildString = "<div class='smiley faded smiley-" + currentNumber + "'></div>";
+        if (smileyNumber == currentNumber) {
+            buildString = "<div class='smiley smiley-" + currentNumber + "'></div>";
+        }
+        smileyHTML += buildString;
+    }
+    smileyHTML += "</div>";
+    $('#smiley-holder').fadeOut("fast", function(){
+        var div = $(smileyHTML).hide();
+        $(this).replaceWith(div);
+        $('#smiley-holder').fadeIn("fast", function(){
+            for (let i = 0; i < 5; i++) {
+                let currentNumber = i + 1;
+                let smallString = ".smiley-" + currentNumber;
+                $('#smiley-holder').on("click", smallString, () => smileyBtnClicked(currentNumber));
+            }
+        });
+    });
+
     if (GLOBAL_PAGETYPE == PAGETYPE_ENUM.STARTSMILEY) {
         dataToSend['startDate'] =  Date.now();
         dataToSend['startSmiley'] = smileyNumber;
@@ -39,28 +61,6 @@ function smileyBtnClicked(smileyNumber) {
         dataToSend['endSmiley'] = smileyNumber;
         dataToSend['pageType'] = PAGETYPE_ENUM.FEEDBACKSMILEY;
 
-        let smileyHTML = "<div id='smiley-holder'>";
-        for (let i = 0; i < 5; i++) {
-            let currentNumber = i + 1;
-            let buildString = "<div class='smiley faded smiley-" + currentNumber + "'></div>";
-            if (smileyNumber == currentNumber) {
-                buildString = "<div class='smiley smiley-" + currentNumber + "'></div>";
-            }
-            smileyHTML += buildString;
-        }
-        smileyHTML += "</div>";
-        $('#smiley-holder').fadeOut("fast", function(){
-            var div = $(smileyHTML).hide();
-            $(this).replaceWith(div);
-            $('#smiley-holder').fadeIn("fast", function(){
-                for (let i = 0; i < 5; i++) {
-                    let currentNumber = i + 1;
-                    let smallString = ".smiley-" + currentNumber;
-                    $('#smiley-holder').on("click", smallString, () => smileyBtnClicked(currentNumber));
-                }
-            });
-        });
-
         $.ajax({
             url: "/",
             method: "POST",
@@ -71,6 +71,9 @@ function smileyBtnClicked(smileyNumber) {
                 var div = $(response).hide();
                 $(this).replaceWith(div);
                 $('#body-container').fadeIn("slow");
+                $('#worryHeader').text(feedbackHeader);
+                $('#worry-btn').text(feedbackBtnText);
+                $('#worry-text').placeHolder = feedbackPlaceholder;
             });
             changePageType();
         }).fail(function(error){
@@ -81,63 +84,49 @@ function smileyBtnClicked(smileyNumber) {
 
 function worrySubmitted() {
     var inputText = $('#worry-text').val();
-
-    if (GLOBAL_PAGETYPE == PAGETYPE_ENUM.WORRY) {
-        if (inputText != '') {
-            dataToSend['entryText'] = inputText;
-            dataToSend['endDate'] = Date.now();
-            dataToSend['pageType'] = GLOBAL_PAGETYPE;
-
-            $.ajax({
-                url: "/",
-                method: "POST",
-                data: dataToSend,
-                async: false
-            }).done(function(response){
-                // $('#body-container').replaceWith(response);
-                $('#body-container').fadeOut("slow", function(){
-                    var div = $(response).hide();
-                    $(this).replaceWith(div);
-                    $('#body-container').fadeIn("slow");
-                    changePageType();
-                });
-            }).fail(function(error){
-                console.log(error);
-            });
-        }
-        else {
-            $('#additional-text').text(worryTextEmpty);
-        }
+    if (inputText != '') {
+        dataToSend['entryText'] = inputText;
+        dataToSend['endDate'] = Date.now();
     }
 
-    else if (GLOBAL_PAGETYPE == PAGETYPE_ENUM.FEEDBACK) {
-        var numFadedSmiley = $('.smiley.faded').length;
-        
-        dataToSend['pageType'] = PAGETYPE_ENUM.FEEDBACK;
+    if (GLOBAL_PAGETYPE == PAGETYPE_ENUM.WORRY) {
+        dataToSend['pageType'] = GLOBAL_PAGETYPE;
 
-        if (numFadedSmiley != 4) {
-            $('#additional-text').text(endSmileyEmpty);
-        }
-        else {
-            if (inputText != '' && numFadedSmiley == 4) {
-                dataToSend['feedbackText'] = inputText;
-            }
-            $.ajax({
-                url: "/",
-                method: "POST",
-                data: dataToSend,
-                async: false
-            }).done(function(response){
-                console.log(response);
-               $('#body-container').fadeOut("slow", function(){
+        $.ajax({
+            url: "/",
+            method: "POST",
+            data: dataToSend,
+            async: false
+        }).done(function(response){
+            // $('#body-container').replaceWith(response);
+            $('#body-container').fadeOut("slow", function(){
                 var div = $(response).hide();
                 $(this).replaceWith(div);
                 $('#body-container').fadeIn("slow");
-            }).fail(function(error){
-                console.log(error);
+                changePageType();
             });
-            });
-        }
+        }).fail(function(error){
+            console.log(error);
+        });
+    }
+    else if (GLOBAL_PAGETYPE == PAGETYPE_ENUM.FEEDBACK) {       
+        dataToSend['pageType'] = PAGETYPE_ENUM.FEEDBACK;
+
+        $.ajax({
+            url: "/",
+            method: "POST",
+            data: dataToSend,
+            async: false
+        }).done(function(response){
+            console.log(response);
+            $('#body-container').fadeOut("slow", function(){
+            var div = $(response).hide();
+            $(this).replaceWith(div);
+            $('#body-container').fadeIn("slow");
+        }).fail(function(error){
+            console.log(error);
+        });
+        });
     }
 }
 
@@ -159,6 +148,7 @@ function relaxDone() {
         console.log(error);
     });
 }
+
 function performRelaxationactivity() {
     var totalLength = meditationTextWithTiming.length;
 
@@ -200,7 +190,7 @@ function setMeditationText(text, stepTiming, showTimer, isDone) {
             else {
                 $('#relax-timing').text('');
             }
-            
+
             stepTimingCounter = stepTimingCounter - 1;
 
             if (stepTimingCounter == 0) {
@@ -233,8 +223,5 @@ function changePageType() {
     }
     else if (GLOBAL_PAGETYPE == PAGETYPE_ENUM.FEEDBACKSMILEY) {
         GLOBAL_PAGETYPE = PAGETYPE_ENUM.FEEDBACK;
-        $('#worryHeader').text(feedbackHeader);
-        $('#worry-btn').text(feedbackBtnText);
-        $('#worry-text').placeHolder = feedbackPlaceholder;
     }
 }
