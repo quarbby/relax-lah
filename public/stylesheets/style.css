@@ -30,7 +30,7 @@ body {
 .heropic {
   background-image: url(../images/Aurora.jpg);
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: auto;
   height: 100vh;
   color: #FFFFF0;
   -webkit-filter: saturate(200%);
@@ -62,14 +62,16 @@ body {
   height: 13vw;
   width: 13vw;
   cursor: pointer;
-  border-radius: 13vw;
-  box-shadow: 0.2vw 0.2vw 0.3vw #222222;
+  border-radius: 13vh;
+  box-shadow: 0.2vh 0.2vh 0.3vh #222222;
+  margin-right: 50px;
 }
 
 #smiley-holder {
-  display: grid;
+  /* display: grid; */
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   align-items: center;
+  margin-left: 150px;
 }
 
 .smiley-1 {
@@ -125,6 +127,14 @@ body {
   color: #FFFFF0;
   background: #222222;
   opacity: 0.5;
+}
+
+.custom-btn {
+  opacity: 0.8;
+  color: black;
+  height: 4vh;
+  font-size: 2em;
+  font-weight: bold;
 }
 
 .input-overlay {
