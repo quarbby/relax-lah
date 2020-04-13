@@ -185,6 +185,7 @@ function setMeditationText(text, stepTiming, showTimer, isDone) {
 
         var relaxTimer = setInterval(() => {
             if (showTimer) {
+                console.log("showing timer")
                 $('#relax-timing').text(stepTimingCounter);
             }
             else {

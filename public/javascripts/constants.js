@@ -27,84 +27,84 @@ const meditationTextWithTiming = [
         text: "Take a seat or get into a comfortable position",
         stepTiming: 5,
         showTimer: false,
-        timingDelay: 5
+        timingDelay: 0
     },
     {
         text: "Spend the next few seconds noticing your breathing",
         stepTiming: 5,
         showTimer: false,
-        timingDelay: 10
+        timingDelay: 5
     },
     {
         text: "Now, breathe through your nose for the next 5 seconds",
         stepTiming: 5,
         showTimer: false,
-        timingDelay: 15
+        timingDelay: 10
     },
     {
         text: "Hold it for the next 4 seconds",
         stepTiming: 4,
         showTimer: true,
-        timingDelay: 19
+        timingDelay: 15
     },
     {
         text: "Now, slowly breathe out with your mouth for the next 10 seconds",
         stepTiming: 10,
         showTimer: true,
-        timingDelay: 23
+        timingDelay: 19
     },
     {
         text: "It's okay if you didn't get it the first time. Let's try again",
         stepTiming: 4,
         showTimer: true,
-        timingDelay: 33
+        timingDelay: 29
     },
     {
         text: "Breathe in through your nose for the next 5 seconds",
         stepTiming: 5,
         showTimer: true,
-        timingDelay: 37
+        timingDelay: 34
     },
     {
         text: "Hold it for the next 4 seconds",
         stepTiming: 4,
         showTimer: true,
-        timingDelay: 42
+        timingDelay: 38
     },
     {
         text: "Slowly exhale with your mouth for the next 10 seconds",
         stepTiming: 10,
         showTimer: true,
-        timingDelay: 46
+        timingDelay: 48
     },
     {
         text: "You're getting it, let's do it once more",
         stepTiming: 5,
-        timingDelay: 51,
+        timingDelay: 53,
         showTimer: false
     },
     {
         text: "Breathe in through your nose for the next 5 seconds",
         stepTiming: 5,
-        timingDelay: 56,
+        timingDelay: 58,
         showTimer: true
     },
     {
         text: "Hold it for the next 4 seconds",
         stepTiming: 4,
-        timingDelay: 60,
+        timingDelay: 62,
         showTimer: true
     },
     {
         text: "Slowly exhale with your mouth for the next 10 seconds",
         stepTiming: 10,
-        timingDelay: 70,
+        timingDelay: 72,
         showTimer: true
     },
     {
         text: "And there you go.",
         stepTiming: 5,
-        timingDelay: 75,
+        timingDelay: 77,
         showTimer: false
     },
 ]
