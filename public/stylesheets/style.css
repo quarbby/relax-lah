@@ -64,12 +64,14 @@ body {
   cursor: pointer;
   border-radius: 13vh;
   box-shadow: 0.2vh 0.2vh 0.3vh #222222;
+  margin-right: 50px;
 }
 
 #smiley-holder {
-  display: grid;
+  /* display: grid; */
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   align-items: center;
+  margin-left: 150px;
 }
 
 .smiley-1 {
