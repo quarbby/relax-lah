@@ -137,6 +137,10 @@ body {
   font-weight: bold;
 }
 
+.custom-btn:focus {
+  outline: darkslategray;
+}
+
 .input-overlay {
   position: absolute;
 }

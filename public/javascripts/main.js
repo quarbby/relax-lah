@@ -25,7 +25,6 @@ function smileyBtnClicked(smileyNumber) {
             data: dataToSend,
             async: false
         }).done(function(response){
-            // $('#body-container').replaceWith(response);
             $('#body-container').fadeOut("slow", function(){
                 var div = $(response).hide();
                 $(this).replaceWith(div);
@@ -36,8 +35,9 @@ function smileyBtnClicked(smileyNumber) {
             console.log(error);
     });
     }
-    else if (GLOBAL_PAGETYPE == PAGETYPE_ENUM.FEEDBACK) { 
+    else if (GLOBAL_PAGETYPE == PAGETYPE_ENUM.FEEDBACKSMILEY) { 
         dataToSend['endSmiley'] = smileyNumber;
+        dataToSend['pageType'] = PAGETYPE_ENUM.FEEDBACKSMILEY;
 
         let smileyHTML = "<div id='smiley-holder'>";
         for (let i = 0; i < 5; i++) {
@@ -61,14 +61,18 @@ function smileyBtnClicked(smileyNumber) {
             });
         });
 
-        dataToSend['pageType'] = PAGETYPE_ENUM.FEEDBACKSMILEY;
         $.ajax({
             url: "/",
             method: "POST",
             data: dataToSend,
             async: false
         }).done(function(response){
-            $('#additional-text').text(endSmileySuccess);
+            $('#body-container').fadeOut("slow", function(){
+                var div = $(response).hide();
+                $(this).replaceWith(div);
+                $('#body-container').fadeIn("slow");
+            });
+            changePageType();
         }).fail(function(error){
             console.log(error);
     });
@@ -163,12 +167,12 @@ function performRelaxationactivity() {
             if (i == totalLength-1) { isDone = true; }
             else { isDone = false; }
 
-            setMeditationText(step.text, step.stepTiming, isDone);
+            setMeditationText(step.text, step.stepTiming, step.showTimer, isDone);
         }, step.timingDelay*1500);
     });
 }
 
-function setMeditationText(text, stepTiming, isDone) {
+function setMeditationText(text, stepTiming, showTimer, isDone) {
     let mediHTML = "<div id='meditation-div'><p id='meditation-text'>" + text + "</p>";
     mediHTML += "<p id='relax-timing'>" + stepTiming + "</p>"
     mediHTML += "</div>";
@@ -183,10 +187,10 @@ function setMeditationText(text, stepTiming, isDone) {
 
         var stepTimingCounter = stepTiming;
 
-        if (step.showTimer) {
+        if (showTimer) {
             $('#relax-timing').text(stepTimingCounter);
         }
-        
+
         stepTimingCounter = stepTimingCounter - 1;
 
         var relaxTimer = setInterval(() => {
@@ -218,8 +222,11 @@ function changePageType() {
         GLOBAL_PAGETYPE = PAGETYPE_ENUM.MEDITATION;
     }
     else if (GLOBAL_PAGETYPE == PAGETYPE_ENUM.MEDITATION) {
-        GLOBAL_PAGETYPE = PAGETYPE_ENUM.FEEDBACK;
+        GLOBAL_PAGETYPE = PAGETYPE_ENUM.FEEDBACKSMILEY;
         $('#smileyHeader').text(smileyHeaderEnd);
+    }
+    else if (GLOBAL_PAGETYPE == PAGETYPE_ENUM.FEEDBACKSMILEY) {
+        GLOBAL_PAGETYPE = PAGETYPE_ENUM.FEEDBACK;
         $('#worryHeader').text(feedbackHeader);
         $('#worry-btn').text(feedbackBtnText);
         $('#worry-text').placeHolder = feedbackPlaceholder;

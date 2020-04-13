@@ -38,12 +38,11 @@ exports.show_page = function(req, res) {
         
         case PAGECONTROLLER_TYPE_ENUM.FEEDBACK_SMILEY:
             var statusCode = writeFeedbackSmileyIntoDb(req.body, entryObjId);
-            res.send(statusCode.toString());
+            //res.send(statusCode.toString());
+            res.render('smiles');
             break;
 
         case PAGECONTROLLER_TYPE_ENUM.FEEDBACK:
-            console.log('are we at final stage?')
-
             if (req.body.feedbackText == '') {
                 res.render('bye');
             }
