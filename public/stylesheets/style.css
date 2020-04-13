@@ -59,11 +59,11 @@ body {
   display: grid;
   justify-self: center;
   background-size: cover;
-  height: 13vh;
-  width: 13vh;
+  height: 13vw;
+  width: 13vw;
   cursor: pointer;
-  border-radius: 13vh;
-  box-shadow: 0.2vh 0.2vh 0.3vh #222222;
+  border-radius: 13vw;
+  box-shadow: 0.2vw 0.2vw 0.3vw #222222;
 }
 
 #smiley-holder {
