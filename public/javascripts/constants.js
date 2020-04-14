@@ -63,7 +63,7 @@ const meditationTextWithTiming = [
         text: "Breathe in through your nose for the next 5 seconds",
         stepTiming: 5,
         showTimer: true,
-        timingDelay: 34
+        timingDelay: 33
     },
     {
         text: "Hold it for the next 4 seconds",
@@ -75,18 +75,18 @@ const meditationTextWithTiming = [
         text: "Slowly exhale with your mouth for the next 10 seconds",
         stepTiming: 10,
         showTimer: true,
-        timingDelay: 48
+        timingDelay: 42
     },
     {
         text: "You're getting it, let's do it once more",
         stepTiming: 5,
-        timingDelay: 53,
+        timingDelay: 52,
         showTimer: false
     },
     {
         text: "Breathe in through your nose for the next 5 seconds",
         stepTiming: 5,
-        timingDelay: 58,
+        timingDelay: 57,
         showTimer: true
     },
     {
@@ -98,13 +98,13 @@ const meditationTextWithTiming = [
     {
         text: "Slowly exhale with your mouth for the next 10 seconds",
         stepTiming: 10,
-        timingDelay: 72,
+        timingDelay: 66,
         showTimer: true
     },
     {
         text: "And there you go.",
         stepTiming: 5,
-        timingDelay: 77,
+        timingDelay: 76,
         showTimer: false
     },
 ]
