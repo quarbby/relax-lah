@@ -13,6 +13,24 @@ var startLoop = 1;
     $('#smileyHeader').text(smileyHeaderStart);
 // }
 
+$(".modal-wide").on("show.bs.modal", function() {
+    var height = $(window).height() - 200;
+    $(this).find(".modal-body").css("max-height", height);
+  });
+
+function test(){
+    console.log('test clicked')
+    $("#test_area").html("<h3>Good choice</h3>")
+        
+    if ($('#x').is(":checked"))
+    {
+    $('#test_main').html("<h2>You chose x</h2>");
+    }
+    else {
+        $('#test_main').html("<h2>You chose o</h2>");
+    }
+}
+
 function smileyBtnClicked(smileyNumber) {
     let smileyHTML = "<div id='smiley-holder'>";
     for (let i = 0; i < 5; i++) {
@@ -89,6 +107,8 @@ function worrySubmitted() {
         dataToSend['endDate'] = Date.now();
     }
 
+    $('#myModal').show();
+
     if (GLOBAL_PAGETYPE == PAGETYPE_ENUM.WORRY) {
         dataToSend['pageType'] = GLOBAL_PAGETYPE;
 
@@ -98,13 +118,14 @@ function worrySubmitted() {
             data: dataToSend,
             async: false
         }).done(function(response){
+            console.log(response);
             // $('#body-container').replaceWith(response);
-            $('#body-container').fadeOut("slow", function(){
-                var div = $(response).hide();
-                $(this).replaceWith(div);
-                $('#body-container').fadeIn("slow");
-                changePageType();
-            });
+            // $('#body-container').fadeOut("slow", function(){
+            //     var div = $(response).hide();
+            //     $(this).replaceWith(div);
+            //     $('#body-container').fadeIn("slow");
+            //     changePageType();
+            // });
         }).fail(function(error){
             console.log(error);
         });
