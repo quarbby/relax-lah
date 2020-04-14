@@ -34,17 +34,10 @@ html(lang='en')
         div(class="modal-content")
         div(class="modal-header")
           button(type="button" class="close" data-dismiss="modal" aria-hidden="true") &times;
-          h4(class="modal-title") Title
+          h4(class="modal-title") A Minute Of Your Time
           
         div(class="modal-body")
-          p text form etc. &hellip;
-          input(id= "x" type="radio", name="symbol" value="x" checked) 
-          = " x"
-          input(id= "y" type="radio", name="symbol" value="o") 
-          = " o"
+          p Sharing your inputs with us could help those managing chronic stress and worry in experiencing a better, calmer tomorrow. We would love to have your permission to do so! 
           div(class="modal-footer")
-          button(type="button" class="btn btn-default" data-dismiss="modal") Close
-          button(type="button" onclick="test()" class="btn btn-primary") Submit
-
-          #test_area 
-              #test_main
+          button(type="button" class="btn btn-default" data-dismiss="modal" onclick="sendFeedback()") I'll pass
+          button(type="button" onclick="sendFeedback()" class="btn btn-blue-grey" data-dismiss="modal") Share

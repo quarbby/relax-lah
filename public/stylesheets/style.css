@@ -133,6 +133,7 @@ body {
   opacity: 0.8;
   color: black;
   height: 8vh;
+  width: 100%;
   font-size: 2em;
   font-weight: bold;
 }

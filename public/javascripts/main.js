@@ -16,7 +16,26 @@ var startLoop = 1;
 $(".modal-wide").on("show.bs.modal", function() {
     var height = $(window).height() - 200;
     $(this).find(".modal-body").css("max-height", height);
-  });
+});
+
+function sendFeedback() {
+    dataToSend['pageType'] = PAGETYPE_ENUM.FEEDBACK;
+
+    $.ajax({
+        url: "/",
+        method: "POST",
+        data: dataToSend,
+        async: false
+    }).done(function(response){
+        $('#body-container').fadeOut("slow", function(){
+        var div = $(response).hide();
+        $(this).replaceWith(div);
+        $('#body-container').fadeIn("slow");
+    }).fail(function(error){
+        console.log(error);
+    });
+    });
+}
 
 function test(){
     console.log('test clicked')
@@ -69,6 +88,10 @@ function smileyBtnClicked(smileyNumber) {
                 var div = $(response).hide();
                 $(this).replaceWith(div);
                 $('#body-container').fadeIn("slow");
+
+                $('#worry-btn').show();
+                $('#feedback-btn').hide();
+                $('#worryHeader').text(worryHeader);
             });
             changePageType();
         }).fail(function(error){
@@ -89,9 +112,13 @@ function smileyBtnClicked(smileyNumber) {
                 var div = $(response).hide();
                 $(this).replaceWith(div);
                 $('#body-container').fadeIn("slow");
+
                 $('#worryHeader').text(feedbackHeader);
                 $('#worry-btn').text(feedbackBtnText);
                 $('#worry-text').placeHolder = feedbackPlaceholder;
+                $('#worry-btn').hide();
+                $('#feedback-btn').show();
+
             });
             changePageType();
         }).fail(function(error){
@@ -107,8 +134,6 @@ function worrySubmitted() {
         dataToSend['endDate'] = Date.now();
     }
 
-    $('#myModal').show();
-
     if (GLOBAL_PAGETYPE == PAGETYPE_ENUM.WORRY) {
         dataToSend['pageType'] = GLOBAL_PAGETYPE;
 
@@ -118,35 +143,14 @@ function worrySubmitted() {
             data: dataToSend,
             async: false
         }).done(function(response){
-            console.log(response);
-            // $('#body-container').replaceWith(response);
-            // $('#body-container').fadeOut("slow", function(){
-            //     var div = $(response).hide();
-            //     $(this).replaceWith(div);
-            //     $('#body-container').fadeIn("slow");
-            //     changePageType();
-            // });
-        }).fail(function(error){
-            console.log(error);
-        });
-    }
-    else if (GLOBAL_PAGETYPE == PAGETYPE_ENUM.FEEDBACK) {       
-        dataToSend['pageType'] = PAGETYPE_ENUM.FEEDBACK;
-
-        $.ajax({
-            url: "/",
-            method: "POST",
-            data: dataToSend,
-            async: false
-        }).done(function(response){
-            console.log(response);
             $('#body-container').fadeOut("slow", function(){
-            var div = $(response).hide();
-            $(this).replaceWith(div);
-            $('#body-container').fadeIn("slow");
+                var div = $(response).hide();
+                $(this).replaceWith(div);
+                $('#body-container').fadeIn("slow");
+                changePageType();
+            });
         }).fail(function(error){
             console.log(error);
-        });
         });
     }
 }
@@ -208,7 +212,6 @@ function setMeditationText(text, stepTiming, showTimer, isDone) {
 
         var relaxTimer = setInterval(() => {
             if (showTimer) {
-                console.log("showing timer")
                 $('#relax-timing').text(stepTimingCounter);
             }
             else {
@@ -235,9 +238,7 @@ function setMeditationText(text, stepTiming, showTimer, isDone) {
 function changePageType() {
     if (GLOBAL_PAGETYPE == PAGETYPE_ENUM.STARTSMILEY) {
         GLOBAL_PAGETYPE = PAGETYPE_ENUM.WORRY;
-        $('#worryHeader').text(worryHeader);
     }
-
     else if (GLOBAL_PAGETYPE == PAGETYPE_ENUM.WORRY) {
         GLOBAL_PAGETYPE = PAGETYPE_ENUM.MEDITATION;
     }

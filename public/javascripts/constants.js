@@ -20,7 +20,7 @@ const feedbackError = 'Uhoh Error. Please try again when the server is more sane
 
 const worryHeader = 'It\'s okay to not feel okay. Rant below and watch it vanish, like magic';
 const feedbackHeader = 'Leave us feedback, let us know how to make your day better';
-const feedbackBtnText = 'Here\'s my feedback!'
+const feedbackBtnText = 'Here\'s my feedback!';
 
 const meditationTextWithTiming = [
     {
