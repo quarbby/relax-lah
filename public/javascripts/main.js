@@ -14,8 +14,11 @@ var startLoop = 1;
 // }
 
 $(".modal-wide").on("show.bs.modal", function() {
-    var height = $(window).height() - 200;
+    // var height = $(window).height() - 200;
+    // $(this).find(".modal-body").css("max-height", height);
+    var height = $(window).height() - 500;
     $(this).find(".modal-body").css("max-height", height);
+    $(this).find(".modal-body").css("max-width", height);
 });
 
 function sendFeedback() {

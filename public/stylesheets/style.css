@@ -16,13 +16,18 @@ body {
 
 #normalModal {
   background-color: white;
-  opacity: 50%;
+  opacity: 80%;
+  height: 300px;
+  width: 600px;
+  top: 40%;
+  left: 40px;
 }
 
 .modal-btn {
   justify-self: center;
   padding-left: 20px;
   padding-right: 20px;
+  margin-left: 15px;
 }
 
 .main-container {
