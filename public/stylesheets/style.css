@@ -16,11 +16,10 @@ body {
 
 #normalModal {
   background-color: white;
-  opacity: 80%;
-  height: 300px;
+  height: 250px;
   width: 600px;
-  top: 40%;
-  left: 40px;
+  top: 5%;
+  left: calc(50vw - 300px);
 }
 
 .modal-btn {
@@ -28,6 +27,15 @@ body {
   padding-left: 20px;
   padding-right: 20px;
   margin-left: 15px;
+}
+
+.modal-dialog {
+  margin: 0px;
+  height: 100%;
+}
+
+.modal-header {
+  background: aliceblue;
 }
 
 .main-container {
