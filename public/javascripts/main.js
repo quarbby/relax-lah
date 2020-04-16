@@ -16,9 +16,13 @@ var startLoop = 1;
 $(".modal-wide").on("show.bs.modal", function() {
     // var height = $(window).height() - 200;
     // $(this).find(".modal-body").css("max-height", height);
-    var height = $(window).height() - 500;
-    $(this).find(".modal-body").css("max-height", height);
-    $(this).find(".modal-body").css("max-width", height);
+    // var height = $(window).height() - 500;
+    // $(this).find(".modal-body").css("max-height", height);
+    // $(this).find(".modal-body").css("max-width", height);
+    $(this).find('.modal-body').css({
+        'max-height': '80%',
+        'max-width': '80%'
+      });
 });
 
 function sendFeedback() {
@@ -94,6 +98,7 @@ function smileyBtnClicked(smileyNumber) {
 
                 $('#worry-btn').show();
                 $('#feedback-btn').hide();
+                // $('#feedback-btn').show();
                 $('#worryHeader').text(worryHeader);
             });
             changePageType();
@@ -132,30 +137,35 @@ function smileyBtnClicked(smileyNumber) {
 
 function worrySubmitted() {
     var inputText = $('#worry-text').val();
+
     if (inputText != '') {
         dataToSend['entryText'] = inputText;
         dataToSend['endDate'] = Date.now();
-    }
 
-    if (GLOBAL_PAGETYPE == PAGETYPE_ENUM.WORRY) {
-        dataToSend['pageType'] = GLOBAL_PAGETYPE;
-
-        $.ajax({
-            url: "/",
-            method: "POST",
-            data: dataToSend,
-            async: false
-        }).done(function(response){
-            $('#body-container').fadeOut("slow", function(){
-                var div = $(response).hide();
-                $(this).replaceWith(div);
-                $('#body-container').fadeIn("slow");
-                changePageType();
+        if (GLOBAL_PAGETYPE == PAGETYPE_ENUM.WORRY) {
+            dataToSend['pageType'] = GLOBAL_PAGETYPE;
+    
+            $.ajax({
+                url: "/",
+                method: "POST",
+                data: dataToSend,
+                async: false
+            }).done(function(response){
+                $('#body-container').fadeOut("slow", function(){
+                    var div = $(response).hide();
+                    $(this).replaceWith(div);
+                    $('#body-container').fadeIn("slow");
+                    changePageType();
+                });
+            }).fail(function(error){
+                console.log(error);
             });
-        }).fail(function(error){
-            console.log(error);
-        });
+        }
     }
+    else {
+        $('#additional-text').text(worryTextEmpty);
+    }
+
 }
 
 function relaxDone() {
