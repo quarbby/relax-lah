@@ -2,23 +2,12 @@ var GLOBAL_PAGETYPE = PAGETYPE_ENUM.STARTSMILEY;
 var dataToSend = {};
 var startLoop = 1;
 
-// $(window).on('load', function(){
-//     initState()
-// });
+GLOBAL_PAGETYPE = PAGETYPE_ENUM.STARTSMILEY;
+dataToSend = {};
 
-// function initState() {
-    GLOBAL_PAGETYPE = PAGETYPE_ENUM.STARTSMILEY;
-    dataToSend = {};
-
-    $('#smileyHeader').text(smileyHeaderStart);
-// }
+$('#smileyHeader').text(smileyHeaderStart);
 
 $(".modal-wide").on("show.bs.modal", function() {
-    // var height = $(window).height() - 200;
-    // $(this).find(".modal-body").css("max-height", height);
-    // var height = $(window).height() - 500;
-    // $(this).find(".modal-body").css("max-height", height);
-    // $(this).find(".modal-body").css("max-width", height);
     $(this).find('.modal-body').css({
         'max-height': '80%',
         'max-width': '80%'
@@ -58,28 +47,6 @@ function test(){
 }
 
 function smileyBtnClicked(smileyNumber) {
-    // let smileyHTML = "<div id='smiley-holder'>";
-    // for (let i = 0; i < 5; i++) {
-    //     let currentNumber = i + 1;
-    //     let buildString = "<div class='smiley faded smiley-" + currentNumber + "'></div>";
-    //     if (smileyNumber == currentNumber) {
-    //         buildString = "<div class='smiley smiley-" + currentNumber + "'></div>";
-    //     }
-    //     smileyHTML += buildString;
-    // }
-    // smileyHTML += "</div>";
-    // $('#smiley-holder').fadeOut("fast", function(){
-    //     var div = $(smileyHTML).hide();
-    //     $(this).replaceWith(div);
-    //     $('#smiley-holder').fadeIn("fast", function(){
-    //         for (let i = 0; i < 5; i++) {
-    //             let currentNumber = i + 1;
-    //             let smallString = ".smiley-" + currentNumber;
-    //             $('#smiley-holder').on("click", smallString, () => smileyBtnClicked(currentNumber));
-    //         }
-    //     });
-    // });
-
     if (GLOBAL_PAGETYPE == PAGETYPE_ENUM.STARTSMILEY) {
         dataToSend['startDate'] =  Date.now();
         dataToSend['startSmiley'] = smileyNumber;
@@ -98,7 +65,6 @@ function smileyBtnClicked(smileyNumber) {
 
                 $('#worry-btn').show();
                 $('#feedback-btn').hide();
-                // $('#feedback-btn').show();
                 $('#worryHeader').text(worryHeader);
             });
             changePageType();
@@ -220,8 +186,6 @@ function setMeditationText(text, stepTiming, showTimer, isDone) {
 
         var stepTimingCounter = stepTiming - 1;
         var stepTimingNoWordCounter = 0;
-
-        // stepTimingCounter = stepTimingCounter - 1;
 
         var relaxTimer = setInterval(() => {
             if (showTimer) {

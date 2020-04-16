@@ -38,7 +38,6 @@ exports.show_page = function(req, res) {
         
         case PAGECONTROLLER_TYPE_ENUM.FEEDBACK_SMILEY:
             var statusCode = writeFeedbackSmileyIntoDb(req.body, entryObjId);
-            //res.send(statusCode.toString());
             res.render('worry');
             break;
 
@@ -49,12 +48,6 @@ exports.show_page = function(req, res) {
 
             var statusCode = writeIntoDb(req.body, entryObjId);
             res.render('bye');
-            // if (statusCode == 200) {
-            //     res.render('bye');
-            // }
-            // else if (statusCode == 500) {
-            //     res.render('error');
-            // }
             entryObjId = undefined;
             break;
 
