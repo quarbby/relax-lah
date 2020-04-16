@@ -25,7 +25,7 @@ $(".modal-wide").on("show.bs.modal", function() {
       });
 });
 
-function sendFeedback() {
+function handleFBLogic() {
     dataToSend['pageType'] = PAGETYPE_ENUM.FEEDBACK;
 
     $.ajax({
