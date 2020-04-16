@@ -13,7 +13,7 @@ const PAGECONTROLLER_TYPE_ENUM = {
 var entryObjId = undefined;
 
 exports.index = function(req, res) {   
-    res.render('index', { title: 'Relax Lah' });
+    res.render('index', { title: 'Relax N Breathe!' });
 };
 
 exports.show_page = function(req, res) {

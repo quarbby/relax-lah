@@ -1,0 +1,1 @@
+C:\Program Files\MongoDB\Server\4.2\bin\mongoexport -h ds243768.mlab.com:43768 -d heroku_6hf0qxkv -c entries -u bashbash2 -p hello1 -o C:\Users\lynne\Documents\relax-lah\exports\out.csv --csv -f id,date_of_entry,date_of_start,date_of_end,start_smiley,end_smiley,entry_text,feedback
