@@ -58,27 +58,27 @@ function test(){
 }
 
 function smileyBtnClicked(smileyNumber) {
-    let smileyHTML = "<div id='smiley-holder'>";
-    for (let i = 0; i < 5; i++) {
-        let currentNumber = i + 1;
-        let buildString = "<div class='smiley faded smiley-" + currentNumber + "'></div>";
-        if (smileyNumber == currentNumber) {
-            buildString = "<div class='smiley smiley-" + currentNumber + "'></div>";
-        }
-        smileyHTML += buildString;
-    }
-    smileyHTML += "</div>";
-    $('#smiley-holder').fadeOut("fast", function(){
-        var div = $(smileyHTML).hide();
-        $(this).replaceWith(div);
-        $('#smiley-holder').fadeIn("fast", function(){
-            for (let i = 0; i < 5; i++) {
-                let currentNumber = i + 1;
-                let smallString = ".smiley-" + currentNumber;
-                $('#smiley-holder').on("click", smallString, () => smileyBtnClicked(currentNumber));
-            }
-        });
-    });
+    // let smileyHTML = "<div id='smiley-holder'>";
+    // for (let i = 0; i < 5; i++) {
+    //     let currentNumber = i + 1;
+    //     let buildString = "<div class='smiley faded smiley-" + currentNumber + "'></div>";
+    //     if (smileyNumber == currentNumber) {
+    //         buildString = "<div class='smiley smiley-" + currentNumber + "'></div>";
+    //     }
+    //     smileyHTML += buildString;
+    // }
+    // smileyHTML += "</div>";
+    // $('#smiley-holder').fadeOut("fast", function(){
+    //     var div = $(smileyHTML).hide();
+    //     $(this).replaceWith(div);
+    //     $('#smiley-holder').fadeIn("fast", function(){
+    //         for (let i = 0; i < 5; i++) {
+    //             let currentNumber = i + 1;
+    //             let smallString = ".smiley-" + currentNumber;
+    //             $('#smiley-holder').on("click", smallString, () => smileyBtnClicked(currentNumber));
+    //         }
+    //     });
+    // });
 
     if (GLOBAL_PAGETYPE == PAGETYPE_ENUM.STARTSMILEY) {
         dataToSend['startDate'] =  Date.now();
